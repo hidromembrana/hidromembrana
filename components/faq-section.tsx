@@ -12,11 +12,11 @@ const faqs = [
     },
     {
         question: "¿Qué tipos de geomembranas ofrecen?",
-        answer: "Ofrecemos principalmente geomembranas de HDPE (Polietileno de Alta Densidad) y LLDPE (Polietileno Lineal de Baja Densidad) en diversos espesores.",
+        answer: "Nos especializamos en geomembranas de HDPE (Polietileno de Alta Densidad), disponibles tanto en certificación Norma GM13 como en calidad Nominal, en espesores de 0.5mm a 2.5mm.",
     },
     {
-        question: "¿Venden insumos como soldadura y polylock?",
-        answer: "Sí, disponemos de un amplio stock de insumos incluyendo cordón de soldadura, polylock, y herramientas especializadas.",
+        question: "¿Venden insumos de soldadura?",
+        answer: "Sí, suministramos soldadura de aporte HDPE de alta calidad, ideal para los procesos de termofusión y reparaciones.",
     },
     {
         question: "¿Cómo puedo solicitar una cotización?",
