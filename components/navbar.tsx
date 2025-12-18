@@ -25,10 +25,17 @@ export function Navbar() {
             <div className="container mx-auto flex h-16 items-center justify-between px-4">
                 {/* Logo */}
                 <Link href="/" className="flex items-center space-x-2">
-                    <span className="text-xl font-bold bg-brand-gradient bg-clip-text text-transparent">
+                    <div className="relative h-10 w-10 overflow-hidden rounded-md">
+                        <Image
+                            src="/logo.png"
+                            alt="Hidromembrana Logo"
+                            fill
+                            className="object-cover"
+                        />
+                    </div>
+                    <span className="text-xl font-bold bg-[image:var(--image-brand-gradient)] bg-clip-text text-transparent">
                         Hidromembrana
                     </span>
-                    {/* Can add Image logo here if needed */}
                 </Link>
 
                 {/* Desktop Nav */}

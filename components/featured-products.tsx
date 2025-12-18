@@ -38,22 +38,28 @@ export function FeaturedProducts() {
                     {featuredProducts.map((product) => (
                         <div
                             key={product.id}
-                            className="flex flex-col justify-between rounded-xl border border-border bg-background p-6 shadow-sm transition-all hover:shadow-md"
+                            className="group relative flex flex-col justify-between overflow-hidden rounded-xl border border-border bg-background p-6 shadow-sm transition-all hover:-translate-y-1 hover:shadow-lg dark:hover:border-brand-blue/30"
                         >
-                            <div className="space-y-4">
-                                <div className="aspect-video w-full rounded-lg bg-surface/50 border border-border flex items-center justify-center text-muted-foreground">
-                                    {/* Placeholder image */}
-                                    <span className="text-sm">Imagen {product.title}</span>
+                            <div className="absolute inset-0 z-0 bg-gradient-to-br from-brand-cyan/5 to-brand-blue/5 opacity-0 transition-opacity group-hover:opacity-100" />
+
+                            <div className="relative z-10 space-y-4">
+                                <div className="aspect-video w-full overflow-hidden rounded-lg bg-surface/50 border border-border flex items-center justify-center text-muted-foreground transition-colors group-hover:border-brand-blue/20">
+                                    {/* Placeholder image - could be replaced with real images later */}
+                                    <div className="font-bold text-4xl text-brand-blue/20 group-hover:text-brand-blue/40 transition-colors">
+                                        {product.title.charAt(0)}
+                                    </div>
                                 </div>
-                                <h3 className="text-xl font-bold">{product.title}</h3>
-                                <p className="text-muted-foreground">{product.description}</p>
+                                <div className="space-y-2">
+                                    <h3 className="text-xl font-bold group-hover:text-brand-blue transition-colors">{product.title}</h3>
+                                    <p className="text-muted-foreground">{product.description}</p>
+                                </div>
                             </div>
-                            <div className="mt-6">
+                            <div className="relative z-10 mt-6">
                                 <Link
                                     href={product.href}
-                                    className="inline-flex items-center text-sm font-medium text-brand-blue hover:text-brand-cyan hover:underline"
+                                    className="inline-flex items-center text-sm font-medium text-brand-blue hover:text-brand-cyan"
                                 >
-                                    Saber más <ArrowRight className="ml-1 h-4 w-4" />
+                                    Saber más <ArrowRight className="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1" />
                                 </Link>
                             </div>
                         </div>

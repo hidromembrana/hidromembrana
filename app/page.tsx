@@ -12,8 +12,11 @@ export default function Home() {
   return (
     <>
       <Hero />
-      <FeaturedProducts />
-      <FaqSection />
+      <div className="relative">
+        <div className="absolute inset-0 -z-10 bg-grid-pattern [mask-image:linear-gradient(to_bottom,white,transparent)]" />
+        <FeaturedProducts />
+        <FaqSection />
+      </div>
     </>
   );
 }

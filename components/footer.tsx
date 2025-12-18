@@ -1,4 +1,5 @@
 import Link from "next/link"
+import Image from "next/image"
 import { Facebook, Instagram, Linkedin, Mail, MapPin, Phone } from "lucide-react"
 
 export function Footer() {
@@ -8,9 +9,19 @@ export function Footer() {
                 <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
                     {/* Company Info */}
                     <div className="space-y-4">
-                        <h3 className="text-2xl font-bold bg-brand-gradient bg-clip-text text-transparent">
-                            Hidromembrana
-                        </h3>
+                        <div className="flex items-center space-x-3">
+                            <div className="relative h-12 w-12 overflow-hidden rounded-md">
+                                <Image
+                                    src="/logo.png"
+                                    alt="Hidromembrana Logo"
+                                    fill
+                                    className="object-cover"
+                                />
+                            </div>
+                            <h3 className="text-2xl font-bold bg-[image:var(--image-brand-gradient)] bg-clip-text text-transparent">
+                                Hidromembrana
+                            </h3>
+                        </div>
                         <p className="text-sm text-muted-foreground">
                             Expertos en soluciones de impermeabilización y geosintéticos. Calidad y confianza en cada proyecto.
                         </p>
