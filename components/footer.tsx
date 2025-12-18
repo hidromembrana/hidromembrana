@@ -10,12 +10,12 @@ export function Footer() {
                     {/* Company Info */}
                     <div className="space-y-4">
                         <div className="flex items-center space-x-3">
-                            <div className="relative h-12 w-12 overflow-hidden rounded-md">
+                            <div className="relative h-16 w-16">
                                 <Image
                                     src="/logo.png"
                                     alt="Hidromembrana Logo"
                                     fill
-                                    className="object-cover"
+                                    className="object-contain"
                                 />
                             </div>
                             <h3 className="text-2xl font-bold bg-[image:var(--image-brand-gradient)] bg-clip-text text-transparent">

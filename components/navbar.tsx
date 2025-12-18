@@ -25,12 +25,12 @@ export function Navbar() {
             <div className="container mx-auto flex h-16 items-center justify-between px-4">
                 {/* Logo */}
                 <Link href="/" className="flex items-center space-x-2">
-                    <div className="relative h-10 w-10 overflow-hidden rounded-md">
+                    <div className="relative h-12 w-12">
                         <Image
                             src="/logo.png"
                             alt="Hidromembrana Logo"
                             fill
-                            className="object-cover"
+                            className="object-contain"
                         />
                     </div>
                     <span className="text-xl font-bold bg-[image:var(--image-brand-gradient)] bg-clip-text text-transparent">
