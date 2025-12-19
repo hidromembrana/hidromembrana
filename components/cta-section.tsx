@@ -1,33 +1,57 @@
 import Link from "next/link"
+import { ArrowRight, MessageCircle } from "lucide-react"
 
 export function CtaSection() {
     return (
-        <section className="bg-brand-blue py-20 text-white relative overflow-hidden">
-            {/* Abstract Background Shapes */}
-            <div className="absolute top-0 right-0 -tr-20 h-64 w-64 rounded-full bg-white/10 blur-3xl" />
-            <div className="absolute bottom-0 left-0 -bl-20 h-64 w-64 rounded-full bg-brand-cyan/20 blur-3xl" />
+        <section className="relative overflow-hidden py-24 lg:py-32">
+            {/* Background with Gradient and Texture */}
+            <div className="absolute inset-0 z-0">
+                <div className="absolute inset-0 bg-gradient-to-br from-brand-blue via-brand-blue/90 to-brand-cyan/80" />
+                <div className="absolute inset-0 bg-[url('/hero.png')] opacity-10 bg-cover bg-center mix-blend-overlay" />
+                <div className="absolute inset-0 bg-grid-pattern opacity-10 [mask-image:linear-gradient(to_bottom,white,transparent)]" />
+            </div>
 
-            <div className="container relative z-10 mx-auto px-4 text-center">
-                <h2 className="mb-4 text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">
-                    ¿Listo para iniciar tu proyecto?
-                </h2>
-                <p className="mx-auto mb-8 max-w-2xl text-lg text-blue-50">
-                    Contamos con el stock más amplio de geomembranas y un equipo de instalación certificado.
-                    Obtén una cotización personalizada hoy mismo.
-                </p>
-                <div className="flex flex-col items-center justify-center space-y-4 sm:flex-row sm:space-x-4 sm:space-y-0">
-                    <Link
-                        href="/contacto"
-                        className="inline-flex h-12 items-center justify-center rounded-md bg-white px-8 text-sm font-medium text-brand-blue shadow transition-colors hover:bg-zinc-100 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
-                    >
-                        Solicitar Cotización
-                    </Link>
-                    <Link
-                        href="/contacto"
-                        className="inline-flex h-12 items-center justify-center rounded-md border border-white/30 bg-white/10 px-8 text-sm font-medium text-white shadow-sm transition-colors hover:bg-white/20 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
-                    >
-                        Hablemos por WhatsApp
-                    </Link>
+            {/* Glowing Orbs */}
+            <div className="absolute top-0 right-0 -translate-y-1/2 translate-x-1/2 w-96 h-96 bg-brand-cyan/30 rounded-full blur-3xl" />
+            <div className="absolute bottom-0 left-0 translate-y-1/2 -translate-x-1/2 w-96 h-96 bg-white/20 rounded-full blur-3xl" />
+
+            <div className="container relative z-10 mx-auto px-4">
+                <div className="mx-auto max-w-4xl overflow-hidden rounded-3xl border border-white/20 bg-white/10 p-8 shadow-2xl backdrop-blur-md sm:p-12 lg:p-16">
+                    <div className="text-center">
+                        <h2 className="mb-6 text-3xl font-bold tracking-tight text-white sm:text-4xl md:text-5xl drop-shadow-sm">
+                            ¿Listo para iniciar tu proyecto?
+                        </h2>
+                        <p className="mx-auto mb-10 max-w-2xl text-lg text-blue-50 md:text-xl leading-relaxed">
+                            Contamos con el stock más amplio de geomembranas y un equipo de instalación certificado.
+                            Garantizamos la calidad y durabilidad en cada obra.
+                        </p>
+
+                        <div className="flex flex-col items-center justify-center gap-4 sm:flex-row sm:gap-6">
+                            <Link
+                                href="/contacto"
+                                className="group relative inline-flex h-14 items-center justify-center overflow-hidden rounded-full bg-white px-8 text-base font-bold text-brand-blue shadow-lg transition-all hover:bg-zinc-50 hover:scale-105 hover:shadow-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50"
+                            >
+                                <span className="relative flex items-center gap-2">
+                                    Solicitar Cotización
+                                    <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
+                                </span>
+                            </Link>
+
+                            <Link
+                                href="https://wa.me/YOUR_NUMBER"
+                                className="group inline-flex h-14 items-center justify-center rounded-full border-2 border-white/30 bg-black/20 px-8 text-base font-medium text-white backdrop-blur-sm transition-all hover:bg-black/30 hover:border-white/50 hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50"
+                            >
+                                <span className="flex items-center gap-2">
+                                    <MessageCircle className="h-5 w-5" />
+                                    Hablemos por WhatsApp
+                                </span>
+                            </Link>
+                        </div>
+
+                        <p className="mt-8 text-sm text-blue-100/80">
+                            Respuesta rápida en menos de 24 horas.
+                        </p>
+                    </div>
                 </div>
             </div>
         </section>

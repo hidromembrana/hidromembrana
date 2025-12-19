@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Navbar } from "@/components/navbar";
+import { TopBar } from "@/components/top-bar";
 import { Footer } from "@/components/footer";
 import { WhatsAppButton } from "@/components/whatsapp-button";
 import { IS_UNDER_CONSTRUCTION } from "@/lib/config";
@@ -42,6 +43,7 @@ export default function RootLayout({
             children
           ) : (
             <div className="flex min-h-screen flex-col">
+              <TopBar />
               <Navbar />
               <main className="flex-1">{children}</main>
               <Footer />
