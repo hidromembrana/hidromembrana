@@ -1,5 +1,7 @@
 export type ProductCategory = "geomembrana" | "geotextil" | "insumos" | "servicios";
 
+
+
 export interface Product {
     id: string;
     title: string;
@@ -7,27 +9,30 @@ export interface Product {
     category: ProductCategory;
     href: string;
     imagePlaceholder?: string;
+    images?: string[];
     features?: string[];
 }
 
 export const PRODUCTS: Product[] = [
     {
-        id: "geomembrana-hdpe-gm13",
-        title: "Geomembrana HDPE (Norma GM13)",
-        description: "Lámina de Polietileno de Alta Densidad certificada bajo norma GRIGM13. Máxima durabilidad y resistencia química para grandes proyectos y minería.",
+        id: "geomembrana-hdpe",
+        title: "Geomembrana HDPE",
+        description: "Lámina de Polietileno de Alta Densidad (HDPE). Disponible en versiones certificada GRI-GM13 y Nominal (Estándar). Máxima resistencia química y mecánica para proyectos de ingeniería hidráulica, minería y medio ambiente.",
         category: "geomembrana",
-        href: "/productos/geomembrana-hdpe-gm13",
+        href: "/productos/geomembrana-hdpe",
         imagePlaceholder: "GM",
-        features: ["Certificación GRI-GM13", "Espesores: 0.5mm - 2.5mm", "Garantía extendida", "Resistencia UV superior"]
-    },
-    {
-        id: "geomembrana-hdpe-nominal",
-        title: "Geomembrana HDPE (Nominal)",
-        description: "Lámina de Polietileno de Alta Densidad de calidad estándar. Solución eficiente y económica para proyectos de impermeabilización general.",
-        category: "geomembrana",
-        href: "/productos/geomembrana-hdpe-nominal",
-        imagePlaceholder: "GN",
-        features: ["Costo-eficiente", "Impermeabilización confiable", "Espesores estándar", "Alta resistencia mecánica"]
+        images: [
+            "/geomembrana-hdpe-3.webp",
+            "/geomembrana-hdpe-2.webp",
+            "/geomembrana-hdpe.webp"
+        ],
+        features: [
+            "Norma GRI-GM13 (Opción Certificada)",
+            "Calidad Nominal (Opción Económica)",
+            "Espesores: 0.5mm - 2.5mm",
+            "Alta resistencia UV y química",
+            "Garantía de durabilidad"
+        ]
     },
     {
         id: "geotextil",
@@ -36,15 +41,17 @@ export const PRODUCTS: Product[] = [
         category: "geotextil",
         href: "/productos/geotextil",
         imagePlaceholder: "GT",
-        features: ["Disponible en No Tejido", "Costo-eficiente"]
+        images: ["/geotextil-no-tejido.webp", "/geotextil-no-tejido-2.webp"],
+        features: ["Disponible en No Tejido", "Costo-eficiente", "Separación y filtración", "Protección de geomembranas"]
     },
     {
         id: "soldadura-hdpe",
-        title: " Soldadura de Aporte HDPE",
+        title: "Soldadura de Aporte HDPE",
         description: "Cordones de soldadura y material de aporte para termofusión de geomembranas HDPE.",
         category: "insumos",
         href: "/productos/soldadura-hdpe",
         imagePlaceholder: "S",
+        images: ["/soldadura-de-aporte-hdpe.webp"],
         features: ["Compatibilidad 100% HDPE", "Para extrusoras y cuñas", "Alta pureza", "Diferentes diámetros"]
     },
     {

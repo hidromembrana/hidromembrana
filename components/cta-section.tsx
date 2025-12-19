@@ -39,7 +39,7 @@ export function CtaSection() {
 
                             <Link
                                 href="https://wa.me/YOUR_NUMBER"
-                                className="group inline-flex h-14 items-center justify-center rounded-full border-2 border-white/30 bg-black/20 px-8 text-base font-medium text-white backdrop-blur-sm transition-all hover:bg-black/30 hover:border-white/50 hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50"
+                                className="group inline-flex h-14 items-center justify-center rounded-full bg-[#25D366] px-8 text-base font-bold text-white shadow-lg transition-all hover:bg-[#20bd5a] hover:scale-105 hover:shadow-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50"
                             >
                                 <span className="flex items-center gap-2">
                                     <MessageCircle className="h-5 w-5" />

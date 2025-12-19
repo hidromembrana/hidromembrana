@@ -1,4 +1,5 @@
 import Link from "next/link"
+import Image from "next/image"
 import { ArrowRight } from "lucide-react"
 import { Product } from "@/lib/products"
 
@@ -12,10 +13,20 @@ export function ProductCard({ product }: ProductCardProps) {
             <div className="absolute inset-0 z-0 bg-gradient-to-br from-brand-cyan/5 to-brand-blue/5 opacity-0 transition-opacity group-hover:opacity-100" />
 
             <div className="relative z-10 space-y-4 flex-1">
-                <div className="aspect-video w-full overflow-hidden rounded-lg bg-surface/50 border border-border flex items-center justify-center text-muted-foreground transition-colors group-hover:border-brand-blue/20">
-                    <div className="font-bold text-4xl text-brand-blue/20 group-hover:text-brand-blue/40 transition-colors">
-                        {product.imagePlaceholder || product.title.charAt(0)}
-                    </div>
+                <div className="aspect-video w-full overflow-hidden rounded-lg bg-surface/50 border border-border flex items-center justify-center text-muted-foreground transition-colors group-hover:border-brand-blue/20 relative">
+                    {product.images && product.images.length > 0 ? (
+                        <Image
+                            src={product.images[0]}
+                            alt={product.title}
+                            fill
+                            className="object-cover transition-transform duration-500 group-hover:scale-105"
+                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                        />
+                    ) : (
+                        <div className="font-bold text-4xl text-brand-blue/20 group-hover:text-brand-blue/40 transition-colors">
+                            {product.imagePlaceholder || product.title.charAt(0)}
+                        </div>
+                    )}
                 </div>
                 <div className="space-y-2">
                     <h3 className="text-xl font-bold group-hover:text-brand-blue transition-colors">{product.title}</h3>

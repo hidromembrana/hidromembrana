@@ -3,8 +3,7 @@ import Link from "next/link"
 import { ArrowLeft, CheckCircle } from "lucide-react"
 import { PRODUCTS } from "@/lib/products"
 import { CtaSection } from "@/components/cta-section"
-
-
+import { ProductGallery } from "@/components/product-gallery"
 
 export function generateStaticParams() {
     return PRODUCTS.map((product) => ({
@@ -37,9 +36,11 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
             <div className="container mx-auto px-4 py-12">
                 <div className="grid gap-12 lg:grid-cols-2">
                     {/* Image / Visual */}
-                    <div className="aspect-square w-full overflow-hidden rounded-xl bg-surface/50 border border-border flex items-center justify-center">
-                        <span className="text-9xl font-bold text-brand-blue/20">{product.imagePlaceholder || product.title.charAt(0)}</span>
-                    </div>
+                    <ProductGallery
+                        images={product.images}
+                        title={product.title}
+                        fallbackText={product.imagePlaceholder}
+                    />
 
                     {/* Content */}
                     <div className="space-y-8">
