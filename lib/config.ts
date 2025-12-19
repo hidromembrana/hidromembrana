@@ -1,1 +1,1 @@
-export const IS_UNDER_CONSTRUCTION = true;
+export const IS_UNDER_CONSTRUCTION = false;

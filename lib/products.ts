@@ -36,7 +36,7 @@ export const PRODUCTS: Product[] = [
         category: "geotextil",
         href: "/productos/geotextil",
         imagePlaceholder: "GT",
-        features: ["Disponible en No Tejido y Tejido", "Gramajes variados", "Protección de geomembranas", "Estabilización de terrenos"]
+        features: ["Disponible en No Tejido", "Costo-eficiente"]
     },
     {
         id: "soldadura-hdpe",

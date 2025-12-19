@@ -8,7 +8,7 @@ export function Hero() {
             {/* Background Image with Parallax-like feel */}
             <div className="absolute inset-0 -z-30 select-none">
                 <Image
-                    src="/hero.png"
+                    src="/hero.webp"
                     alt="Instalación profesional de geomembranas"
                     fill
                     className="object-cover scale-105"

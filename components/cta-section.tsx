@@ -7,7 +7,7 @@ export function CtaSection() {
             {/* Background with Gradient and Texture */}
             <div className="absolute inset-0 z-0">
                 <div className="absolute inset-0 bg-gradient-to-br from-brand-blue via-brand-blue/90 to-brand-cyan/80" />
-                <div className="absolute inset-0 bg-[url('/hero.png')] opacity-10 bg-cover bg-center mix-blend-overlay" />
+                <div className="absolute inset-0 bg-[url('/hero.webp')] opacity-10 bg-cover bg-center mix-blend-overlay" />
                 <div className="absolute inset-0 bg-grid-pattern opacity-10 [mask-image:linear-gradient(to_bottom,white,transparent)]" />
             </div>
 
