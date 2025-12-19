@@ -14,7 +14,7 @@ export function UnderConstruction() {
                     priority
                 />
             </div>
-            <h1 className="mb-2 text-3xl font-bold tracking-tight text-foreground sm:text-5xl uppercase">
+            <h1 className="mb-2 text-3xl font-bold font-bold bg-[image:var(--image-brand-gradient)] bg-clip-text text-transparent uppercase">
                 Hidromembrana
             </h1>
             <h2 className="mb-4 text-xl font-semibold text-muted-foreground sm:text-2xl">
