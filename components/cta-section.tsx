@@ -38,7 +38,7 @@ export function CtaSection() {
                             </Link>
 
                             <Link
-                                href="https://wa.me/56998131298"
+                                href="https://wa.me/56998131298?text=Hola!%20Me%20gustar%C3%ADa%20cotizar..."
                                 className="group inline-flex h-14 items-center justify-center rounded-full bg-[#25D366] px-8 text-base font-bold text-white shadow-lg transition-all hover:bg-[#20bd5a] hover:scale-105 hover:shadow-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50"
                             >
                                 <span className="flex items-center gap-2">
