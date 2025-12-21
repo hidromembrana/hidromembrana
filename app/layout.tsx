@@ -6,6 +6,7 @@ import { TopBar } from "@/components/top-bar";
 import { Footer } from "@/components/footer";
 import { WhatsAppButton } from "@/components/whatsapp-button";
 import { IS_UNDER_CONSTRUCTION } from "@/lib/config";
+import { UnderConstruction } from "@/components/under-construction";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -40,7 +41,7 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           {IS_UNDER_CONSTRUCTION ? (
-            children
+            <UnderConstruction />
           ) : (
             <div className="flex min-h-screen flex-col">
               <TopBar />
