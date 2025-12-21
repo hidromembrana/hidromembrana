@@ -3,12 +3,9 @@
 import Link from "next/link"
 import {
     Layers,
-    Construction,
-    Droplets,
-    Sprout,
+    ShieldCheck,
     Wrench,
     ArrowRight,
-    ShieldCheck,
 } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { CtaSection } from "@/components/cta-section"
@@ -20,56 +17,36 @@ interface ServiceItem {
     icon: React.ElementType
     color: string
     colSpan?: string
+    hrefId?: string // To map to product ID in quotation
 }
 
 const SERVICES: ServiceItem[] = [
     {
         id: "instalacion-geomembranas",
         title: "Instalación de Geomembranas",
-        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+        description: "Servicio especializado de instalación y termofusión de láminas HDPE/LLDPE/PVC. Contamos con equipos de última generación (extrusoras y cuñas) y personal certificado para asegurar la estanqueidad total de su proyecto.",
         icon: Layers,
         color: "from-blue-500 to-cyan-400",
-        colSpan: "md:col-span-2 lg:col-span-2"
+        colSpan: "md:col-span-2 lg:col-span-2",
+        hrefId: "servicio-instalacion-reparacion"
     },
     {
         id: "instalacion-geotextiles",
         title: "Instalación de Geotextiles",
-        description: "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+        description: "Colocación profesional de geotextiles no tejidos para protección, separación y drenaje. Fundamental para asegurar la integridad de la geomembrana y la estabilidad del suelo.",
         icon: ShieldCheck,
         color: "from-emerald-500 to-green-400",
-        colSpan: "md:col-span-1 lg:col-span-1"
-    },
-    {
-        id: "construccion-tranques",
-        title: "Construcción de Tranques",
-        description: "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.",
-        icon: Construction,
-        color: "from-orange-500 to-amber-400",
-        colSpan: "md:col-span-1 lg:col-span-1"
-    },
-    {
-        id: "construccion-biopiscina",
-        title: "Construcción de Biopiscina",
-        description: "Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet.",
-        icon: Droplets,
-        color: "from-cyan-500 to-blue-400",
-        colSpan: "md:col-span-2 lg:col-span-2"
-    },
-    {
-        id: "humedales-depuradores",
-        title: "Humedales Depuradores",
-        description: "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident.",
-        icon: Sprout,
-        color: "from-green-500 to-emerald-400",
-        colSpan: "md:col-span-1 lg:col-span-1"
+        colSpan: "md:col-span-1 lg:col-span-1",
+        hrefId: "servicio-instalacion-reparacion"
     },
     {
         id: "mantencion-instalaciones",
-        title: "Mantención de Instalaciones",
-        description: "Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est.",
+        title: "Mantención y Reparación",
+        description: "Diagnóstico y reparación de fugas en sistemas existentes. Realizamos parches, soldaduras de reconexión y pruebas de vacío/spark test para certificar la hermeticidad.",
         icon: Wrench,
         color: "from-slate-500 to-zinc-400",
-        colSpan: "md:col-span-2 lg:col-span-2"
+        colSpan: "md:col-span-3 lg:col-span-3", // Full width primarily
+        hrefId: "servicio-instalacion-reparacion"
     }
 ]
 
@@ -111,7 +88,7 @@ export default function ServiciosPage() {
                         >
                             {/* Colorful Gradient Background on Hover */}
                             <div className={cn(
-                                "absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-10 bg-gradient-to-br",
+                                "pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-10 bg-gradient-to-br",
                                 service.color
                             )} />
 
@@ -132,7 +109,7 @@ export default function ServiciosPage() {
                             </p>
 
                             <Link
-                                href="/contacto" // Or individual service pages if we create them later
+                                href={`/cotizar?product=${service.hrefId || "servicio-instalacion-reparacion"}`}
                                 className="inline-flex items-center text-sm font-semibold text-brand-blue transition-colors group-hover:text-brand-cyan"
                             >
                                 Solicitar Servicio

@@ -2,11 +2,12 @@
 
 import Link from "next/link"
 import { MessageCircle } from "lucide-react"
+import { CONTACT_INFO } from "@/lib/config"
 
 export function WhatsAppButton() {
     return (
         <Link
-            href="https://wa.me/56998131298?text=Hola!%20Me%20gustar%C3%ADa%20cotizar..."
+            href={CONTACT_INFO.whatsapp.url}
             target="_blank"
             rel="noopener noreferrer"
             className="fixed bottom-6 right-6 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-green-500 text-white shadow-lg transition-transform hover:scale-110 hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2"

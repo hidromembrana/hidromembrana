@@ -54,7 +54,7 @@ export function Navbar() {
                     ))}
                     <ThemeToggle />
                     <Link
-                        href="/contacto"
+                        href="/cotizar"
                         className="rounded-full bg-brand-blue px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-brand-cyan"
                     >
                         Cotizar

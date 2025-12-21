@@ -1,5 +1,6 @@
 import { Truck, Clock, Phone, MessageCircle } from "lucide-react"
 import Link from "next/link"
+import { CONTACT_INFO } from "@/lib/config"
 
 export function TopBar() {
     return (
@@ -19,15 +20,15 @@ export function TopBar() {
 
                 <div className="flex flex-wrap items-center justify-center gap-4 md:justify-end">
                     <Link
-                        href="tel:+56912345678"
+                        href={`tel:${CONTACT_INFO.whatsapp.raw}`} // Using raw number for tel link if preferred, or generic contact number
                         className="flex items-center gap-1.5 transition-colors hover:text-brand-cyan"
                     >
                         <Phone className="h-3.5 w-3.5" />
-                        <span>+56 9 1234 5678</span>
+                        <span>{CONTACT_INFO.whatsapp.number}</span>
                     </Link>
                     <div className="hidden h-3 w-px bg-white/30 sm:block" />
                     <Link
-                        href="https://wa.me/56912345678"
+                        href={CONTACT_INFO.whatsapp.url}
                         className="flex items-center gap-1.5 transition-colors hover:text-brand-cyan"
                     >
                         <MessageCircle className="h-3.5 w-3.5" />

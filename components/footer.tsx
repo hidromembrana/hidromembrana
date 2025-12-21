@@ -1,6 +1,7 @@
 import Link from "next/link"
 import Image from "next/image"
 import { Facebook, Instagram, Linkedin, Mail, MapPin, Phone } from "lucide-react"
+import { CONTACT_INFO } from "@/lib/config"
 
 export function Footer() {
     return (
@@ -86,15 +87,15 @@ export function Footer() {
                         <ul className="space-y-3 text-sm">
                             <li className="flex items-start space-x-3">
                                 <MapPin className="h-5 w-5 text-brand-blue shrink-0" />
-                                <span className="text-muted-foreground">Dirección comercial, Ciudad, País (Por definir)</span>
+                                <span className="text-muted-foreground">{CONTACT_INFO.address}</span>
                             </li>
                             <li className="flex items-center space-x-3">
                                 <Phone className="h-5 w-5 text-brand-blue shrink-0" />
-                                <span className="text-muted-foreground">+56 9 1234 5678</span>
+                                <span className="text-muted-foreground">{CONTACT_INFO.whatsapp.number}</span>
                             </li>
                             <li className="flex items-center space-x-3">
                                 <Mail className="h-5 w-5 text-brand-blue shrink-0" />
-                                <span className="text-muted-foreground">contacto@hidromembrana.cl</span>
+                                <span className="text-muted-foreground">{CONTACT_INFO.email}</span>
                             </li>
                         </ul>
                     </div>

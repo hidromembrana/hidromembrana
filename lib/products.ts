@@ -56,7 +56,7 @@ export const PRODUCTS: Product[] = [
     },
     {
         id: "servicio-instalacion-reparacion",
-        title: "Instalación y Reparación",
+        title: "Instalación o Reparación",
         description: "Servicio completo de instalación certificada y reparación de sistemas de impermeabilización.",
         category: "servicios",
         href: "/servicios",

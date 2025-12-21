@@ -45,7 +45,7 @@ export function Hero() {
 
                         <div className="flex flex-col w-full gap-4 sm:flex-row sm:justify-center">
                             <Link
-                                href="/contacto"
+                                href="/cotizar"
                                 className="group relative inline-flex h-14 items-center justify-center overflow-hidden rounded-full bg-brand-blue px-10 text-base font-bold text-white shadow-lg transition-all hover:bg-brand-cyan hover:scale-105 hover:shadow-brand-blue/25 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50"
                             >
                                 <span className="flex items-center gap-2">

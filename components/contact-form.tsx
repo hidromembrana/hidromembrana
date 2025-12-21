@@ -4,6 +4,7 @@ import { useState } from "react"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import * as z from "zod"
+import { CONTACT_INFO } from "@/lib/config"
 import { Button } from "@/components/ui/button"
 import {
     Form,
@@ -102,7 +103,7 @@ export function ContactForm() {
                         <FormItem>
                             <FormLabel>Teléfono (Opcional)</FormLabel>
                             <FormControl>
-                                <Input placeholder="+56 9 ..." {...field} />
+                                <Input placeholder={CONTACT_INFO.whatsapp.number} {...field} />
                             </FormControl>
                             <FormMessage />
                         </FormItem>

@@ -1,5 +1,6 @@
 import Link from "next/link"
 import { ArrowRight, MessageCircle } from "lucide-react"
+import { CONTACT_INFO } from "@/lib/config"
 
 export function CtaSection() {
     return (
@@ -28,7 +29,7 @@ export function CtaSection() {
 
                         <div className="flex flex-col items-center justify-center gap-4 sm:flex-row sm:gap-6">
                             <Link
-                                href="/contacto"
+                                href="/cotizar"
                                 className="group relative inline-flex h-14 items-center justify-center overflow-hidden rounded-full bg-white px-8 text-base font-bold text-brand-blue shadow-lg transition-all hover:bg-zinc-50 hover:scale-105 hover:shadow-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50"
                             >
                                 <span className="relative flex items-center gap-2">
@@ -38,7 +39,7 @@ export function CtaSection() {
                             </Link>
 
                             <Link
-                                href="https://wa.me/56998131298?text=Hola!%20Me%20gustar%C3%ADa%20cotizar..."
+                                href={CONTACT_INFO.whatsapp.url}
                                 className="group inline-flex h-14 items-center justify-center rounded-full bg-[#25D366] px-8 text-base font-bold text-white shadow-lg transition-all hover:bg-[#20bd5a] hover:scale-105 hover:shadow-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50"
                             >
                                 <span className="flex items-center gap-2">

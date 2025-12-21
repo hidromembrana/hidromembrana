@@ -1,5 +1,6 @@
 import { ContactForm } from "@/components/contact-form"
 import { Mail, MapPin, Phone, Clock } from "lucide-react"
+import { CONTACT_INFO } from "@/lib/config"
 
 export const metadata = {
     title: "Contacto | Hidromembrana",
@@ -29,8 +30,8 @@ export default function ContactoPage() {
                                     <Phone className="h-5 w-5 text-primary mt-1" />
                                     <div>
                                         <p className="font-medium">Teléfono / WhatsApp</p>
-                                        <a href="https://wa.me/56998131298" className="text-muted-foreground hover:text-primary transition-colors">
-                                            +56 9 9813 1298
+                                        <a href={CONTACT_INFO.whatsapp.url} className="text-muted-foreground hover:text-primary transition-colors">
+                                            {CONTACT_INFO.whatsapp.number}
                                         </a>
                                     </div>
                                 </li>
@@ -38,8 +39,8 @@ export default function ContactoPage() {
                                     <Mail className="h-5 w-5 text-primary mt-1" />
                                     <div>
                                         <p className="font-medium">Email</p>
-                                        <a href="mailto:contacto@hidromembrana.cl" className="text-muted-foreground hover:text-primary transition-colors">
-                                            contacto@hidromembrana.cl
+                                        <a href={`mailto:${CONTACT_INFO.email}`} className="text-muted-foreground hover:text-primary transition-colors">
+                                            {CONTACT_INFO.email}
                                         </a>
                                     </div>
                                 </li>
@@ -48,7 +49,7 @@ export default function ContactoPage() {
                                     <div>
                                         <p className="font-medium">Ubicación</p>
                                         <p className="text-muted-foreground">
-                                            Región Metropolitana, Chile.<br />
+                                            {CONTACT_INFO.address}.<br />
                                             Atendemos a todo el país.
                                         </p>
                                     </div>
