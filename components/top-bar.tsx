@@ -14,7 +14,7 @@ export function TopBar() {
                     <div className="hidden h-3 w-px bg-white/30 sm:block" />
                     <div className="flex items-center gap-1.5">
                         <Clock className="h-3.5 w-3.5 text-brand-cyan" />
-                        <span>Lunes a Viernes: 08:30 - 18:00 hrs</span>
+                        <span>Lunes a Viernes: 09:00 - 18:00 hrs</span>
                     </div>
                 </div>
 
