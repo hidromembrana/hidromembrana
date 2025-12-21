@@ -90,7 +90,7 @@ export function Navbar() {
                         ))}
                         <div className="flex items-center justify-between">
                             <Link
-                                href="/contacto"
+                                href="/cotizar"
                                 className="inline-flex items-center justify-center rounded-md bg-brand-blue px-4 py-2 text-sm font-medium text-white hover:bg-brand-cyan"
                                 onClick={() => setIsOpen(false)}
                             >
