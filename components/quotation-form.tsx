@@ -478,7 +478,7 @@ export function QuotationForm() {
                                     <FormItem>
                                         <FormLabel>Teléfono / WhatsApp</FormLabel>
                                         <FormControl>
-                                            <Input placeholder={CONTACT_INFO.whatsapp.number} {...field} />
+                                            <Input placeholder="+56 9 1234 5678" {...field} />
                                         </FormControl>
                                         <FormMessage />
                                     </FormItem>
