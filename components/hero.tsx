@@ -4,7 +4,7 @@ import Image from "next/image"
 
 export function Hero() {
     return (
-        <section className="relative flex min-h-[700px] flex-col justify-center overflow-hidden py-24 md:py-32 lg:py-40">
+        <section className="relative flex min-h-[600px] flex-col justify-center overflow-hidden py-16 md:py-24 lg:py-28">
             {/* Background Image with Parallax-like feel */}
             <div className="absolute inset-0 -z-30 select-none">
                 <Image

@@ -4,7 +4,7 @@ import { CONTACT_INFO } from "@/lib/config"
 
 export function CtaSection() {
     return (
-        <section className="relative overflow-hidden py-24 lg:py-32">
+        <section className="relative overflow-hidden py-16 lg:py-24">
             {/* Background with Gradient and Texture */}
             <div className="absolute inset-0 z-0">
                 <div className="absolute inset-0 bg-gradient-to-br from-brand-blue via-brand-blue/90 to-brand-cyan/80" />
@@ -17,7 +17,7 @@ export function CtaSection() {
             <div className="absolute bottom-0 left-0 translate-y-1/2 -translate-x-1/2 w-96 h-96 bg-white/20 rounded-full blur-3xl" />
 
             <div className="container relative z-10 mx-auto px-4">
-                <div className="mx-auto max-w-4xl overflow-hidden rounded-3xl border border-white/20 bg-white/10 p-8 shadow-2xl backdrop-blur-md sm:p-12 lg:p-16">
+                <div className="mx-auto max-w-4xl overflow-hidden rounded-3xl border border-white/20 bg-white/10 p-8 shadow-2xl backdrop-blur-md sm:p-10 lg:p-12">
                     <div className="text-center">
                         <h2 className="mb-6 text-3xl font-bold tracking-tight text-white sm:text-4xl md:text-5xl drop-shadow-sm">
                             ¿Listo para iniciar tu proyecto?
