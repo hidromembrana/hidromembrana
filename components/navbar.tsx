@@ -16,6 +16,21 @@ const navLinks = [
     { href: "/contacto", label: "Contacto" },
 ]
 
+import { useQuoteCart } from "@/components/providers/quote-cart-provider"
+import { ShoppingCart } from "lucide-react"
+
+function CartBadge() {
+    const { points } = useQuoteCart()
+
+    if (points === 0) return <ShoppingCart className="h-4 w-4" />
+
+    return (
+        <div className="flex items-center justify-center w-5 h-5 rounded-full bg-white text-brand-blue text-xs font-bold">
+            {points}
+        </div>
+    )
+}
+
 export function Navbar() {
     const [isOpen, setIsOpen] = React.useState(false)
     const pathname = usePathname()
@@ -55,9 +70,10 @@ export function Navbar() {
                     <ThemeToggle />
                     <Link
                         href="/cotizar"
-                        className="rounded-full bg-brand-blue px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-brand-cyan"
+                        className="relative rounded-full bg-brand-blue px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-brand-cyan flex items-center gap-2"
                     >
-                        Cotizar
+                        <span>Cotizar</span>
+                        <CartBadge />
                     </Link>
                 </div>
 
@@ -95,6 +111,9 @@ export function Navbar() {
                                 onClick={() => setIsOpen(false)}
                             >
                                 Cotizar
+                                <div className="ml-2 inline-flex">
+                                    <CartBadge />
+                                </div>
                             </Link>
                             <ThemeToggle />
                         </div>

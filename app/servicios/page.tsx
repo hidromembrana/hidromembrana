@@ -9,6 +9,30 @@ import {
 } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { CtaSection } from "@/components/cta-section"
+import { AddToCartDialog } from "@/components/add-to-cart-dialog"
+import { PRODUCTS } from "@/lib/products"
+
+function ServiceAction({ service }: { service: ServiceItem }) {
+    const baseProduct = PRODUCTS.find(p => p.id === (service.hrefId || "servicio-instalacion-reparacion"))
+
+    if (!baseProduct) return null
+
+    // Create a specific product object for this service to ensure the proper title appears in Cart
+    const serviceProduct = {
+        ...baseProduct,
+        title: service.title,
+        id: service.id // Use unique ID to allow separate cart items for different services
+    }
+
+    return (
+        <AddToCartDialog product={serviceProduct}>
+            <button className="inline-flex items-center text-sm font-semibold text-brand-blue transition-colors group-hover:text-brand-cyan cursor-pointer">
+                Solicitar Servicio
+                <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+            </button>
+        </AddToCartDialog>
+    )
+}
 
 interface ServiceItem {
     id: string
@@ -108,13 +132,7 @@ export default function ServiciosPage() {
                                 {service.description}
                             </p>
 
-                            <Link
-                                href={`/cotizar?product=${service.hrefId || "servicio-instalacion-reparacion"}`}
-                                className="inline-flex items-center text-sm font-semibold text-brand-blue transition-colors group-hover:text-brand-cyan"
-                            >
-                                Solicitar Servicio
-                                <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-                            </Link>
+                            <ServiceAction service={service} />
                         </div>
                     ))}
                 </div>
