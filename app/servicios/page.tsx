@@ -1,16 +1,17 @@
 "use client"
 
-import Link from "next/link"
 import {
     Layers,
     ShieldCheck,
     Wrench,
     ArrowRight,
+    MessageCircle, // Using MessageCircle as requested
 } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { CtaSection } from "@/components/cta-section"
 import { AddToCartDialog } from "@/components/add-to-cart-dialog"
 import { PRODUCTS } from "@/lib/products"
+import Link from "next/link" // Needed for CTA link
 
 function ServiceAction({ service }: { service: ServiceItem }) {
     const baseProduct = PRODUCTS.find(p => p.id === (service.hrefId || "servicio-instalacion-reparacion"))
@@ -41,36 +42,47 @@ interface ServiceItem {
     icon: React.ElementType
     color: string
     colSpan?: string
-    hrefId?: string // To map to product ID in quotation
+    hrefId?: string
+    isCta?: boolean // New flag for the CTA card
 }
 
 const SERVICES: ServiceItem[] = [
     {
         id: "instalacion-geomembranas",
         title: "Instalación de Geomembranas",
-        description: "Servicio especializado de instalación y termofusión de láminas HDPE/LLDPE/PVC. Contamos con equipos de última generación (extrusoras y cuñas) y personal certificado para asegurar la estanqueidad total de su proyecto.",
+        description: "Garantizamos estanqueidad total. Soldadura por termofusión bajo norma internacional para evitar multas y pérdidas.",
         icon: Layers,
         color: "from-blue-500 to-cyan-400",
-        colSpan: "md:col-span-2 lg:col-span-2",
+        colSpan: "md:col-span-1",
         hrefId: "servicio-instalacion-reparacion"
     },
     {
         id: "instalacion-geotextiles",
         title: "Instalación de Geotextiles",
-        description: "Colocación profesional de geotextiles no tejidos para protección, separación y drenaje. Fundamental para asegurar la integridad de la geomembrana y la estabilidad del suelo.",
+        description: "Blinda tu inversión. Evita punzonamientos y rupturas en la geomembrana mejorando la estabilidad del suelo.",
         icon: ShieldCheck,
         color: "from-emerald-500 to-green-400",
-        colSpan: "md:col-span-1 lg:col-span-1",
+        colSpan: "md:col-span-1",
         hrefId: "servicio-instalacion-reparacion"
     },
     {
         id: "mantencion-instalaciones",
         title: "Mantención y Reparación",
-        description: "Diagnóstico y reparación de fugas en sistemas existentes. Realizamos parches, soldaduras de reconexión y pruebas de vacío/spark test para certificar la hermeticidad.",
+        description: "¿Tu tranque pierde nivel? Detectamos y sellamos filtraciones críticas rápidamente para recuperar la operatividad.",
         icon: Wrench,
         color: "from-slate-500 to-zinc-400",
-        colSpan: "md:col-span-3 lg:col-span-3", // Full width primarily
+        colSpan: "md:col-span-1",
         hrefId: "servicio-instalacion-reparacion"
+    },
+    {
+        // New CTA Card
+        id: "expert-consultation",
+        title: "¿Dudas con tu Proyecto?",
+        description: "No arriesgues tu obra. Nuestros ingenieros te ayudan a calcular espesores y cubicaciones gratis.",
+        icon: MessageCircle,
+        color: "bg-primary text-primary-foreground", // Special styling handling in render
+        colSpan: "md:col-span-1",
+        isCta: true
     }
 ]
 
@@ -97,42 +109,79 @@ export default function ServiciosPage() {
                 </div>
             </section>
 
-            {/* Bento Grid Services */}
+            {/* Bento Grid Services 2x2 */}
             <section className="container mx-auto px-4 pb-24">
-                <div className="grid grid-cols-1 gap-6 md:grid-cols-3 lg:grid-cols-3 auto-rows-[minmax(300px,auto)]">
+                <div className="grid grid-cols-1 gap-6 md:grid-cols-2 auto-rows-fr">
                     {SERVICES.map((service) => (
                         <div
                             key={service.id}
                             className={cn(
-                                "group relative overflow-hidden rounded-3xl border transition-all hover:scale-[1.01] hover:shadow-2xl backdrop-blur-sm p-8",
-                                "bg-white border-zinc-200 shadow-sm hover:border-brand-blue/30",
-                                "dark:bg-white/5 dark:border-white/10 dark:hover:border-white/20 dark:shadow-none",
+                                "group relative overflow-hidden rounded-3xl border transition-all hover:scale-[1.01] hover:shadow-2xl p-8 flex flex-col",
+                                !service.isCta && "bg-white border-zinc-200 shadow-sm hover:border-brand-blue/30 backdrop-blur-sm dark:bg-white/5 dark:border-white/10 dark:hover:border-white/20 dark:shadow-none",
+                                service.isCta && "bg-brand-blue border-transparent text-white shadow-lg hover:bg-brand-blue/90",
                                 service.colSpan
                             )}
                         >
-                            {/* Colorful Gradient Background on Hover */}
-                            <div className={cn(
-                                "pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-10 bg-gradient-to-br",
-                                service.color
-                            )} />
+                            {/* Standard Service Card Content */}
+                            {!service.isCta && (
+                                <>
+                                    {/* Colorful Gradient Background on Hover */}
+                                    <div className={cn(
+                                        "pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-10 bg-gradient-to-br",
+                                        service.color
+                                    )} />
 
-                            {/* Icon Blob */}
-                            <div className={cn(
-                                "mb-6 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br shadow-lg",
-                                service.color
-                            )}>
-                                <service.icon className="h-8 w-8 text-white" />
-                            </div>
+                                    {/* Icon Blob */}
+                                    <div className={cn(
+                                        "mb-6 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br shadow-lg flex-shrink-0",
+                                        service.color
+                                    )}>
+                                        <service.icon className="h-8 w-8 text-white" />
+                                    </div>
 
-                            <h3 className="mb-3 text-2xl font-bold tracking-tight text-foreground">
-                                {service.title}
-                            </h3>
+                                    <h3 className="mb-3 text-2xl font-bold tracking-tight text-foreground">
+                                        {service.title}
+                                    </h3>
 
-                            <p className="mb-8 text-muted-foreground leading-relaxed">
-                                {service.description}
-                            </p>
+                                    <p className="mb-8 text-muted-foreground leading-relaxed flex-grow">
+                                        {service.description}
+                                    </p>
 
-                            <ServiceAction service={service} />
+                                    <div className="mt-auto">
+                                        <ServiceAction service={service} />
+                                    </div>
+                                </>
+                            )}
+
+                            {/* CTA Card Content */}
+                            {service.isCta && (
+                                <div className="flex flex-col h-full justify-between relative z-10">
+                                    {/* Decorative background element */}
+                                    <div className="absolute -right-8 -top-8 w-40 h-40 bg-white/10 rounded-full blur-2xl" />
+
+                                    <div>
+                                        <div className="mb-6 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-white/20 backdrop-blur-md shadow-inner flex-shrink-0">
+                                            <service.icon className="h-8 w-8 text-white" />
+                                        </div>
+
+                                        <h3 className="mb-3 text-2xl font-bold tracking-tight text-white">
+                                            {service.title}
+                                        </h3>
+
+                                        <p className="mb-8 text-blue-50 leading-relaxed font-medium">
+                                            {service.description}
+                                        </p>
+                                    </div>
+
+                                    <Link
+                                        href="/contacto"
+                                        className="inline-flex items-center text-sm font-bold text-white bg-white/20 hover:bg-white/30 px-6 py-3 rounded-full transition-colors w-fit backdrop-blur-sm"
+                                    >
+                                        Hablar con un Experto
+                                        <ArrowRight className="ml-2 h-4 w-4" />
+                                    </Link>
+                                </div>
+                            )}
                         </div>
                     ))}
                 </div>
