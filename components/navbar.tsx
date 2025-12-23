@@ -55,7 +55,8 @@ export function Navbar() {
 
                 {/* Desktop Nav */}
                 <div className="hidden md:flex md:items-center md:space-x-6">
-                    {navLinks.map((link) => (
+                    {/* Show links only if NOT on home page */}
+                    {pathname !== "/" && navLinks.map((link) => (
                         <Link
                             key={link.href}
                             href={link.href}
@@ -91,7 +92,7 @@ export function Navbar() {
             {isOpen && (
                 <div className="border-t border-border bg-background md:hidden">
                     <div className="container mx-auto flex flex-col space-y-4 p-4">
-                        {navLinks.map((link) => (
+                        {pathname !== "/" && navLinks.map((link) => (
                             <Link
                                 key={link.href}
                                 href={link.href}

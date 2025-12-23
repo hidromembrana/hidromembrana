@@ -22,6 +22,13 @@ export interface QuoteItemConfig {
     format?: string
 }
 
+export interface ContactInfo {
+    name: string
+    email: string
+    phone: string
+    isSaved: boolean
+}
+
 export interface CartItem {
     id: string
     product: Product
@@ -31,16 +38,20 @@ export interface CartItem {
 
 interface QuoteCartState {
     items: CartItem[]
+    contactInfo: ContactInfo
     addItem: (product: Product, config: QuoteItemConfig, quantity?: number) => void
     removeItem: (itemId: string) => void
     updateItem: (itemId: string, config: Partial<QuoteItemConfig>) => void
+    saveContactInfo: (info: ContactInfo) => void
     clearCart: () => void
+    reset: () => void
 }
 
 const useQuoteCartStore = create<QuoteCartState>()(
     persist(
         (set) => ({
             items: [],
+            contactInfo: { name: "", email: "", phone: "", isSaved: false },
             addItem: (product, config, quantity = 1) => {
                 set((state) => ({
                     items: [
@@ -68,10 +79,15 @@ const useQuoteCartStore = create<QuoteCartState>()(
                             : item
                     ),
                 })),
+            saveContactInfo: (info) => set({ contactInfo: info }),
             clearCart: () => {
                 set({ items: [] })
                 localStorage.removeItem("quote-cart")
             },
+            reset: () => {
+                set({ items: [], contactInfo: { name: "", email: "", phone: "", isSaved: false } })
+                localStorage.removeItem("quote-cart")
+            }
         }),
         {
             name: "quote-cart",

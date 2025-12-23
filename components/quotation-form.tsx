@@ -32,19 +32,24 @@ const formSchema = z.object({
 export function QuotationForm() {
     const [isSubmitting, setIsSubmitting] = useState(false)
     const [isSuccess, setIsSuccess] = useState(false)
-    const { items, clearCart } = useQuoteCart()
+    const { items, clearCart, contactInfo } = useQuoteCart()
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
-            name: "",
+            name: contactInfo.name || "",
             company: "",
-            email: "",
-            phone: "",
+            email: contactInfo.email || "",
+            phone: contactInfo.phone || "",
             location: "",
             details: "",
         },
     })
+
+    // Update form if store changes (e.g. initial load)
+    // slightly redundant if component mounts with data but good for consistency
+    // skipping effect for simplicity as defaultValues handle mount
+
 
     async function onSubmit(values: z.infer<typeof formSchema>) {
         if (items.length === 0) {
@@ -104,7 +109,7 @@ export function QuotationForm() {
                             <FormItem>
                                 <FormLabel>Nombre Completo</FormLabel>
                                 <FormControl>
-                                    <Input placeholder="Tu nombre" {...field} />
+                                    <Input placeholder="Tu nombre" {...field} readOnly={contactInfo.isSaved} className={contactInfo.isSaved ? "bg-muted" : ""} />
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
@@ -130,7 +135,7 @@ export function QuotationForm() {
                             <FormItem>
                                 <FormLabel>Email</FormLabel>
                                 <FormControl>
-                                    <Input placeholder="tu@email.com" {...field} />
+                                    <Input placeholder="tu@email.com" {...field} readOnly={contactInfo.isSaved} className={contactInfo.isSaved ? "bg-muted" : ""} />
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
@@ -143,7 +148,7 @@ export function QuotationForm() {
                             <FormItem>
                                 <FormLabel>Teléfono / WhatsApp</FormLabel>
                                 <FormControl>
-                                    <Input placeholder="+56 9 1234 5678" {...field} />
+                                    <Input placeholder="+56 9 1234 5678" {...field} readOnly={contactInfo.isSaved} className={contactInfo.isSaved ? "bg-muted" : ""} />
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>

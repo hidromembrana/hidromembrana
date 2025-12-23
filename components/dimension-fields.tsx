@@ -83,9 +83,9 @@ export function DimensionFields({ form, showHeight = false, showAnchorage = fals
                 name="slope"
                 render={({ field }) => (
                     <FormItem>
-                        <FormLabel>Talud</FormLabel>
+                        <FormLabel>Talud (m)</FormLabel>
                         <FormControl>
-                            <Input placeholder="Ej: 1:1" {...field} />
+                            <Input type="number" step="0.01" {...field} />
                         </FormControl>
                         <FormMessage />
                     </FormItem>
