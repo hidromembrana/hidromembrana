@@ -4,6 +4,8 @@ import { useState, useEffect } from "react"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import * as z from "zod"
+import { toast } from "sonner"
+import { useRouter } from "next/navigation"
 import { Product } from "@/lib/products"
 import { useQuoteCart } from "@/components/providers/quote-cart-provider"
 import { Button } from "@/components/ui/button"
@@ -79,6 +81,7 @@ interface AddToCartDialogProps {
 export function AddToCartDialog({ product, children, variant = "default" }: AddToCartDialogProps) {
     const [open, setOpen] = useState(false)
     const { addItem } = useQuoteCart()
+    const router = useRouter()
 
     // Determine form type
     const isGeosynthetic = product.category === "geomembrana" || product.category === "geotextil"
@@ -138,6 +141,12 @@ export function AddToCartDialog({ product, children, variant = "default" }: AddT
         }
 
         addItem(product, config, values.quantity)
+        toast.success("Producto agregado a la cotización", {
+            action: {
+                label: "Ver",
+                onClick: () => router.push("/cotizar")
+            }
+        })
         setOpen(false)
         form.reset()
     }

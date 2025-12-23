@@ -7,7 +7,7 @@ import { Footer } from "@/components/footer";
 import { WhatsAppButton } from "@/components/whatsapp-button";
 import { IS_UNDER_CONSTRUCTION } from "@/lib/config";
 import { UnderConstruction } from "@/components/under-construction";
-import { QuoteCartProvider } from "@/components/providers/quote-cart-provider";
+
 import { Toaster } from "sonner";
 import "./globals.css";
 
@@ -42,20 +42,18 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <QuoteCartProvider>
-            {IS_UNDER_CONSTRUCTION ? (
-              <UnderConstruction />
-            ) : (
-              <div className="flex min-h-screen flex-col">
-                <TopBar />
-                <Navbar />
-                <main className="flex-1">{children}</main>
-                <Footer />
-                <WhatsAppButton />
-              </div>
-            )}
-            <Toaster />
-          </QuoteCartProvider>
+          {IS_UNDER_CONSTRUCTION ? (
+            <UnderConstruction />
+          ) : (
+            <div className="flex min-h-screen flex-col">
+              <TopBar />
+              <Navbar />
+              <main className="flex-1">{children}</main>
+              <Footer />
+              <WhatsAppButton />
+            </div>
+          )}
+          <Toaster />
         </ThemeProvider>
       </body>
     </html>
