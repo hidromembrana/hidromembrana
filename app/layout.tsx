@@ -7,6 +7,7 @@ import { Footer } from "@/components/footer";
 import { WhatsAppButton } from "@/components/whatsapp-button";
 import { IS_UNDER_CONSTRUCTION } from "@/lib/config";
 import { UnderConstruction } from "@/components/under-construction";
+import { GoogleAnalytics } from '@next/third-parties/google'
 
 import { Toaster } from "sonner";
 import "./globals.css";
@@ -22,9 +23,49 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Hidromembrana",
-  description: "Venta de geomembrana, geotextil y servicios de instalación",
+  metadataBase: new URL('https://www.hidromembrana.cl'),
+
+  title: {
+    default: "Hidromembrana | Venta e Instalación de Geomembranas en Chile",
+    template: "%s | Hidromembrana",
+  },
+
+  description: "Expertos en venta e instalación de geomembrana HDPE, geotextil y polylock. Servicios de termofusión, soldadura y reparaciones en todo Chile.",
+
+  keywords: [
+    "geomembrana",
+    "geotextil",
+    "polylock",
+    "soldadura HDPE",
+    "instalación de geomembrana",
+    "termofusión",
+    "reparación de piscinas agrícolas",
+    "Chile"
+  ],
+
+  openGraph: {
+    title: "Hidromembrana - Soluciones en Geosintéticos",
+    description: "Venta e instalación profesional. Cotiza tu proyecto con nosotros.",
+    url: 'https://www.hidromembrana.cl',
+    siteName: 'Hidromembrana',
+    locale: 'es_CL',
+    type: 'website',
+  },
+
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
 };
+
+const gaId = process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID || "";
 
 export default function RootLayout({
   children,
@@ -32,7 +73,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="es" suppressHydrationWarning>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
@@ -56,6 +97,7 @@ export default function RootLayout({
           <Toaster />
         </ThemeProvider>
       </body>
+      <GoogleAnalytics gaId={gaId} />
     </html>
   );
 }
