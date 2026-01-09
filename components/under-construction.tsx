@@ -4,7 +4,6 @@ import { CONTACT_INFO } from "@/lib/config";
 export function UnderConstruction() {
     return (
         <div className="flex min-h-screen flex-col items-center justify-center bg-background p-4 text-center">
-            {/* Optical alignment: shifting slightly left to balance asymmetrical logo */}
             <div className="mb-8 animate-pulse translate-x-5">
                 <Image
                     src="/logo.png"

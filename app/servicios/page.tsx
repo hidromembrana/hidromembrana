@@ -5,13 +5,13 @@ import {
     ShieldCheck,
     Wrench,
     ArrowRight,
-    MessageCircle, // Using MessageCircle as requested
+    MessageCircle,
 } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { CtaSection } from "@/components/cta-section"
 import { AddToCartDialog } from "@/components/add-to-cart-dialog"
 import { PRODUCTS } from "@/lib/products"
-import Link from "next/link" // Needed for CTA link
+import Link from "next/link"
 
 function ServiceAction({ service }: { service: ServiceItem }) {
     const baseProduct = PRODUCTS.find(p => p.id === (service.hrefId || "servicio-instalacion-reparacion"))
@@ -43,7 +43,7 @@ interface ServiceItem {
     color: string
     colSpan?: string
     hrefId?: string
-    isCta?: boolean // New flag for the CTA card
+    isCta?: boolean
 }
 
 const SERVICES: ServiceItem[] = [
@@ -75,12 +75,11 @@ const SERVICES: ServiceItem[] = [
         hrefId: "servicio-instalacion-reparacion"
     },
     {
-        // New CTA Card
         id: "expert-consultation",
         title: "¿Dudas con tu Proyecto?",
         description: "No arriesgues tu obra. Nuestros ingenieros te ayudan a calcular espesores y cubicaciones gratis.",
         icon: MessageCircle,
-        color: "bg-primary text-primary-foreground", // Special styling handling in render
+        color: "bg-primary text-primary-foreground",
         colSpan: "md:col-span-1",
         isCta: true
     }
@@ -156,7 +155,6 @@ export default function ServiciosPage() {
                             {/* CTA Card Content */}
                             {service.isCta && (
                                 <div className="flex flex-col h-full justify-between relative z-10">
-                                    {/* Decorative background element */}
                                     <div className="absolute -right-8 -top-8 w-40 h-40 bg-white/10 rounded-full blur-2xl" />
 
                                     <div>

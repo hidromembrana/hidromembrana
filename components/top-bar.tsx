@@ -20,7 +20,7 @@ export function TopBar() {
 
                 <div className="flex flex-wrap items-center justify-center gap-4 md:justify-end">
                     <Link
-                        href={`tel:${CONTACT_INFO.whatsapp.raw}`} // Using raw number for tel link if preferred, or generic contact number
+                        href={`tel:${CONTACT_INFO.whatsapp.raw}`}
                         className="flex items-center gap-1.5 transition-colors hover:text-brand-cyan"
                     >
                         <Phone className="h-3.5 w-3.5" />

@@ -4,6 +4,10 @@ import { generateContactEmail, generateLeadEmail, generateQuotationEmail } from 
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
+const LEADS_EMAIL = process.env.FROM_LEADS_EMAIL || 'onboarding@resend.dev';
+const QUOTER_EMAIL = process.env.FROM_QUOTER_EMAIL || 'onboarding@resend.dev';
+const CONTACT_EMAIL = process.env.FROM_CONTACT_FORM_EMAIL || 'onboarding@resend.dev';
+
 export async function POST(request: Request) {
     try {
         const body = await request.json();
@@ -23,17 +27,17 @@ export async function POST(request: Request) {
         // Determine Sender and Subject based on type
         switch (type) {
             case 'lead':
-                fromEmail = process.env.FROM_LEADS_EMAIL || 'onboarding@resend.dev';
+                fromEmail = `Nuevo Lead <${LEADS_EMAIL}>`;
                 subject = '🚀 Nuevo Lead Capturado';
                 htmlContent = generateLeadEmail(payload);
                 break;
             case 'quotation':
-                fromEmail = process.env.FROM_QUOTER_EMAIL || 'onboarding@resend.dev';
+                fromEmail = `Cotización Web <${QUOTER_EMAIL}>`;
                 subject = '💰 Nueva Solicitud de Cotización';
                 htmlContent = generateQuotationEmail(payload);
                 break;
             case 'contact':
-                fromEmail = process.env.FROM_CONTACT_FORM_EMAIL || 'onboarding@resend.dev';
+                fromEmail = `Servicio al Cliente <${CONTACT_EMAIL}>`;
                 subject = '📩 Nuevo Mensaje de Contacto';
                 htmlContent = generateContactEmail(payload);
                 break;

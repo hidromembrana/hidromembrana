@@ -48,15 +48,11 @@ export function LeadCaptureDialog({ open, onOpenChange, onSuccess }: LeadCapture
     })
 
     async function onSubmit(values: LeadFormValues) {
-        // Persist locally immediately
         saveContactInfo({
             ...values,
             isSaved: true
         })
-
-        // Send email (no need to block success on email failure for this one, as per previous logic)
         await sendEmail('lead', values)
-
         onSuccess()
     }
 

@@ -2,7 +2,6 @@
 
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
-import * as z from "zod"
 import { useQuoteCart } from "@/components/providers/quote-cart-provider"
 import { useSendEmail } from "@/hooks/use-send-email"
 import { QuotationFormValues, quotationFormSchema } from "@/lib/schemas/quotation-schema"
@@ -18,10 +17,6 @@ import {
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Loader2, CheckCircle2 } from "lucide-react"
-
-// --- Schemas ---
-
-
 
 export function QuotationForm() {
     const { items, clearCart, contactInfo } = useQuoteCart()
@@ -39,18 +34,12 @@ export function QuotationForm() {
         },
     })
 
-    // Update form if store changes (e.g. initial load)
-    // slightly redundant if component mounts with data but good for consistency
-    // skipping effect for simplicity as defaultValues handle mount
-
-
     async function onSubmit(values: QuotationFormValues) {
         if (items.length === 0) {
             form.setError("root", { message: "Debes agregar al menos un producto a la cotización." })
             return
         }
 
-        // Prepare Payload
         const payload = {
             customer: values,
             items: items.map(item => ({

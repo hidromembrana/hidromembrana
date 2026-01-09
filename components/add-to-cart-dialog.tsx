@@ -3,12 +3,12 @@
 import { useState, useEffect } from "react"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
-import * as z from "zod"
 import { toast } from "sonner"
 import { useRouter } from "next/navigation"
 import { Product } from "@/lib/products"
 import { useQuoteCart } from "@/components/providers/quote-cart-provider"
 import { LeadCaptureDialog } from "@/components/forms/lead-capture-dialog"
+import { quantitySchema, geoSchema, weldingSchema, serviceSchema } from "@/lib/schemas/cart-config-schema"
 import { Button } from "@/components/ui/button"
 import {
     Dialog,
@@ -34,44 +34,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Info, Plus, ShoppingCart } from "lucide-react"
 import { DimensionFields } from "./dimension-fields"
 
-// --- Schemas ---
-
-// Base schema for quantity
-const quantitySchema = z.object({
-    quantity: z.coerce.number().min(1, "Cantidad mínima de 1"),
-})
-
-// Extended schemas based on product type
-const geoSchema = quantitySchema.extend({
-    length: z.coerce.number().min(1, "Requerido"),
-    width: z.coerce.number().min(1, "Requerido"),
-    height: z.coerce.number().min(0, "Requerido"),
-    anchorage: z.coerce.number().min(0, "Requerido"),
-    slope: z.coerce.number().min(0, "Requerido"),
-    squareMeters: z.coerce.number().min(1, "Requerido"),
-})
-
-const weldingSchema = quantitySchema.extend({
-    diameter: z.string().min(1, "Selecciona el diámetro"),
-    format: z.string().min(1, "Selecciona el formato"),
-})
-
-const serviceSchema = quantitySchema.extend({
-    hasMaterial: z.enum(["yes", "no"]),
-    materialType: z.string().optional(),
-    length: z.coerce.number().min(1, "Requerido"),
-    width: z.coerce.number().min(1, "Requerido"),
-    height: z.coerce.number().min(0, "Requerido"),
-    anchorage: z.coerce.number().min(0, "Requerido"),
-    slope: z.coerce.number().min(0, "Requerido"),
-    squareMeters: z.coerce.number().min(1, "Requerido"),
-}).refine((data) => {
-    if (data.hasMaterial === "no" && !data.materialType) return false
-    return true
-}, {
-    message: "Selecciona que material necesitas",
-    path: ["materialType"]
-})
+// --- Schemas imported from "@/lib/schemas/cart-config-schema" ---
 
 interface AddToCartDialogProps {
     product: Product

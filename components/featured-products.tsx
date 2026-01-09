@@ -3,7 +3,6 @@ import { PRODUCTS } from "@/lib/products"
 import { ProductCard } from "@/components/product-card"
 
 export function FeaturedProducts() {
-    // Select top 3 products for the homepage
     const featured = PRODUCTS.slice(0, 3);
 
     return (

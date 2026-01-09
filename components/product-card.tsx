@@ -2,7 +2,6 @@ import Link from "next/link"
 import Image from "next/image"
 import { ArrowRight } from "lucide-react"
 import { Product } from "@/lib/products"
-import { AddToCartDialog } from "@/components/add-to-cart-dialog"
 
 interface ProductCardProps {
     product: Product
