@@ -64,10 +64,12 @@ export function AddToCartDialog({ product, children, variant = "default" }: AddT
         setOpen(true)
     }
 
-    // Determine form type
-    const isGeosynthetic = product.category === "geomembrana" || product.category === "geotextil"
-    const isWelding = product.id === "soldadura-hdpe"
-    const isService = product.category === "servicios"
+    // Determine form type - ensure these values are always strings for comparison
+    const productCategory = String(product.category || "")
+    const productId = String(product.id || "")
+    const isGeosynthetic = productCategory === "geomembrana" || productCategory === "geotextil"
+    const isWelding = productId === "soldadura-hdpe"
+    const isService = productCategory === "servicios"
     const isSimple = !isGeosynthetic && !isWelding && !isService
 
     // Initialize form with dynamic resolver
@@ -94,6 +96,8 @@ export function AddToCartDialog({ product, children, variant = "default" }: AddT
             hasMaterial: undefined,
             materialType: "",
         },
+        mode: "onSubmit", // Only validate on submit, not on mount or change
+        reValidateMode: "onSubmit", // Only revalidate on submit
     })
 
     const onSubmit = (values: any) => {
