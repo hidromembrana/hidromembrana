@@ -1,10 +1,10 @@
 "use client"
 
-import { useState } from "react"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import * as z from "zod"
 import { CONTACT_INFO } from "@/lib/config"
+import { useSendEmail } from "@/hooks/use-send-email"
 import { Button } from "@/components/ui/button"
 import {
     Form,
@@ -26,8 +26,7 @@ const formSchema = z.object({
 })
 
 export function ContactForm() {
-    const [isSubmitting, setIsSubmitting] = useState(false)
-    const [isSuccess, setIsSuccess] = useState(false)
+    const { sendEmail, isSubmitting, isSuccess, reset } = useSendEmail()
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
@@ -40,13 +39,10 @@ export function ContactForm() {
     })
 
     async function onSubmit(values: z.infer<typeof formSchema>) {
-        setIsSubmitting(true)
-        // Simulate API call
-        await new Promise((resolve) => setTimeout(resolve, 1500))
-        console.log(values)
-        setIsSubmitting(false)
-        setIsSuccess(true)
-        form.reset()
+        const success = await sendEmail('contact', values)
+        if (success) {
+            form.reset()
+        }
     }
 
     if (isSuccess) {
@@ -57,7 +53,7 @@ export function ContactForm() {
                 <p className="text-muted-foreground mb-6">
                     Gracias por contactarnos. Te responderemos a la brevedad posible.
                 </p>
-                <Button onClick={() => setIsSuccess(false)} variant="outline">
+                <Button onClick={reset} variant="outline">
                     Enviar otro mensaje
                 </Button>
             </div>

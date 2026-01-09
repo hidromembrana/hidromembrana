@@ -1,10 +1,10 @@
 "use client"
 
-import { useState } from "react"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import * as z from "zod"
 import { useQuoteCart } from "@/components/providers/quote-cart-provider"
+import { useSendEmail } from "@/hooks/use-send-email"
 import { Button } from "@/components/ui/button"
 import {
     Dialog,
@@ -39,7 +39,7 @@ interface LeadCaptureDialogProps {
 
 export function LeadCaptureDialog({ open, onOpenChange, onSuccess }: LeadCaptureDialogProps) {
     const { saveContactInfo } = useQuoteCart()
-    const [isSubmitting, setIsSubmitting] = useState(false)
+    const { sendEmail, isSubmitting } = useSendEmail()
 
     const form = useForm<z.infer<typeof leadSchema>>({
         resolver: zodResolver(leadSchema),
@@ -51,17 +51,15 @@ export function LeadCaptureDialog({ open, onOpenChange, onSuccess }: LeadCapture
     })
 
     async function onSubmit(values: z.infer<typeof leadSchema>) {
-        setIsSubmitting(true)
-
-        // Mock delay for UX feeling
-        await new Promise(resolve => setTimeout(resolve, 600))
-
+        // Persist locally immediately
         saveContactInfo({
             ...values,
             isSaved: true
         })
 
-        setIsSubmitting(false)
+        // Send email (no need to block success on email failure for this one, as per previous logic)
+        await sendEmail('lead', values)
+
         onSuccess()
     }
 

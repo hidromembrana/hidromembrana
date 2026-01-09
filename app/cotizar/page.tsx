@@ -1,4 +1,4 @@
-import { QuotationForm } from "@/components/quotation-form"
+import { QuotationForm } from "@/components/forms/quotation-form"
 import { CartSummary } from "@/components/cart-summary"
 
 export const metadata = {

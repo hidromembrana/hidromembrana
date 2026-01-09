@@ -8,7 +8,7 @@ import { toast } from "sonner"
 import { useRouter } from "next/navigation"
 import { Product } from "@/lib/products"
 import { useQuoteCart } from "@/components/providers/quote-cart-provider"
-import { LeadCaptureDialog } from "@/components/lead-capture-dialog"
+import { LeadCaptureDialog } from "@/components/forms/lead-capture-dialog"
 import { Button } from "@/components/ui/button"
 import {
     Dialog,

@@ -1,10 +1,10 @@
 "use client"
 
-import { useState } from "react"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import * as z from "zod"
 import { useQuoteCart } from "@/components/providers/quote-cart-provider"
+import { useSendEmail } from "@/hooks/use-send-email"
 import { Button } from "@/components/ui/button"
 import {
     Form,
@@ -30,9 +30,8 @@ const formSchema = z.object({
 })
 
 export function QuotationForm() {
-    const [isSubmitting, setIsSubmitting] = useState(false)
-    const [isSuccess, setIsSuccess] = useState(false)
     const { items, clearCart, contactInfo } = useQuoteCart()
+    const { sendEmail, isSubmitting, isSuccess, reset } = useSendEmail()
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
@@ -57,8 +56,6 @@ export function QuotationForm() {
             return
         }
 
-        setIsSubmitting(true)
-
         // Prepare Payload
         const payload = {
             customer: values,
@@ -70,14 +67,14 @@ export function QuotationForm() {
             }))
         }
 
-        // Simulate API call
-        await new Promise((resolve) => setTimeout(resolve, 2000))
-        console.log("Submitting Quotation:", payload)
+        const success = await sendEmail('quotation', payload)
 
-        setIsSubmitting(false)
-        setIsSuccess(true)
-        clearCart()
-        form.reset()
+        if (success) {
+            clearCart()
+            form.reset()
+        } else {
+            form.setError("root", { message: "Hubo un error al enviar la cotización. Inténtalo nuevamente." });
+        }
     }
 
     if (isSuccess) {
@@ -90,7 +87,7 @@ export function QuotationForm() {
                 <p className="text-muted-foreground mb-8 max-w-lg text-lg">
                     Hemos recibido los detalles de tu cotización. Un especialista revisará los ítems solicitados y te contactará a la brevedad.
                 </p>
-                <Button onClick={() => setIsSuccess(false)} size="lg" className="w-full sm:w-auto">
+                <Button onClick={reset} size="lg" className="w-full sm:w-auto">
                     Volver al Inicio
                 </Button>
             </div>

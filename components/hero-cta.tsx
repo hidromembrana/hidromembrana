@@ -3,7 +3,7 @@
 import { useState } from "react"
 import { useQuoteCart } from "@/components/providers/quote-cart-provider"
 import { useRouter } from "next/navigation"
-import { LeadCaptureDialog } from "./lead-capture-dialog"
+import { LeadCaptureDialog } from "@/components/forms/lead-capture-dialog"
 import { Button } from "./ui/button"
 import { ArrowRight } from "lucide-react"
 
