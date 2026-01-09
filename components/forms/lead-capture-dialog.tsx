@@ -5,6 +5,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import * as z from "zod"
 import { useQuoteCart } from "@/components/providers/quote-cart-provider"
 import { useSendEmail } from "@/hooks/use-send-email"
+import { LeadFormValues, leadSchema } from "@/lib/schemas/lead-schema"
 import { Button } from "@/components/ui/button"
 import {
     Dialog,
@@ -25,11 +26,7 @@ import {
 import { Input } from "@/components/ui/input"
 import { Lock } from "lucide-react"
 
-const leadSchema = z.object({
-    name: z.string().min(2, "Ingresa tu nombre"),
-    email: z.string().email("Ingresa un email válido"),
-    phone: z.string().min(8, "Ingresa un teléfono válido"),
-})
+
 
 interface LeadCaptureDialogProps {
     open: boolean
@@ -41,7 +38,7 @@ export function LeadCaptureDialog({ open, onOpenChange, onSuccess }: LeadCapture
     const { saveContactInfo } = useQuoteCart()
     const { sendEmail, isSubmitting } = useSendEmail()
 
-    const form = useForm<z.infer<typeof leadSchema>>({
+    const form = useForm<LeadFormValues>({
         resolver: zodResolver(leadSchema),
         defaultValues: {
             name: "",
@@ -50,7 +47,7 @@ export function LeadCaptureDialog({ open, onOpenChange, onSuccess }: LeadCapture
         },
     })
 
-    async function onSubmit(values: z.infer<typeof leadSchema>) {
+    async function onSubmit(values: LeadFormValues) {
         // Persist locally immediately
         saveContactInfo({
             ...values,

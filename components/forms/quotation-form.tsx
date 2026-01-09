@@ -5,6 +5,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import * as z from "zod"
 import { useQuoteCart } from "@/components/providers/quote-cart-provider"
 import { useSendEmail } from "@/hooks/use-send-email"
+import { QuotationFormValues, quotationFormSchema } from "@/lib/schemas/quotation-schema"
 import { Button } from "@/components/ui/button"
 import {
     Form,
@@ -20,21 +21,14 @@ import { Loader2, CheckCircle2 } from "lucide-react"
 
 // --- Schemas ---
 
-const formSchema = z.object({
-    name: z.string().min(2, "El nombre debe tener al menos 2 caracteres"),
-    company: z.string().optional(),
-    email: z.string().email("Email inválido"),
-    phone: z.string().min(8, "Teléfono inválido"),
-    location: z.string().min(1, "Indica la ubicación del proyecto"),
-    details: z.string().optional(),
-})
+
 
 export function QuotationForm() {
     const { items, clearCart, contactInfo } = useQuoteCart()
     const { sendEmail, isSubmitting, isSuccess, reset } = useSendEmail()
 
-    const form = useForm<z.infer<typeof formSchema>>({
-        resolver: zodResolver(formSchema),
+    const form = useForm<QuotationFormValues>({
+        resolver: zodResolver(quotationFormSchema),
         defaultValues: {
             name: contactInfo.name || "",
             company: "",
@@ -50,7 +44,7 @@ export function QuotationForm() {
     // skipping effect for simplicity as defaultValues handle mount
 
 
-    async function onSubmit(values: z.infer<typeof formSchema>) {
+    async function onSubmit(values: QuotationFormValues) {
         if (items.length === 0) {
             form.setError("root", { message: "Debes agregar al menos un producto a la cotización." })
             return

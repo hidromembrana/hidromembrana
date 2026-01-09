@@ -3,8 +3,8 @@
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import * as z from "zod"
-import { CONTACT_INFO } from "@/lib/config"
 import { useSendEmail } from "@/hooks/use-send-email"
+import { ContactFormValues, contactFormSchema } from "@/lib/schemas/contact-schema"
 import { Button } from "@/components/ui/button"
 import {
     Form,
@@ -18,18 +18,13 @@ import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Loader2, CheckCircle2 } from "lucide-react"
 
-const formSchema = z.object({
-    name: z.string().min(2, "El nombre debe tener al menos 2 caracteres"),
-    email: z.string().email("Email inválido"),
-    phone: z.string().min(8, "Teléfono inválido").optional().or(z.literal("")),
-    message: z.string().min(10, "El mensaje debe tener al menos 10 caracteres"),
-})
+
 
 export function ContactForm() {
     const { sendEmail, isSubmitting, isSuccess, reset } = useSendEmail()
 
-    const form = useForm<z.infer<typeof formSchema>>({
-        resolver: zodResolver(formSchema),
+    const form = useForm<ContactFormValues>({
+        resolver: zodResolver(contactFormSchema),
         defaultValues: {
             name: "",
             email: "",
@@ -38,7 +33,7 @@ export function ContactForm() {
         },
     })
 
-    async function onSubmit(values: z.infer<typeof formSchema>) {
+    async function onSubmit(values: ContactFormValues) {
         const success = await sendEmail('contact', values)
         if (success) {
             form.reset()
