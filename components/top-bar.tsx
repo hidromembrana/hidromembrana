@@ -1,5 +1,6 @@
-import { Truck, Clock, Phone, MessageCircle } from "lucide-react"
+import { Truck, Clock, Phone } from "lucide-react"
 import Link from "next/link"
+import { WhatsAppIcon } from "@/components/icons/whatsapp-icon"
 import { CONTACT_INFO } from "@/lib/config"
 
 export function TopBar() {
@@ -29,9 +30,11 @@ export function TopBar() {
                     <div className="hidden h-3 w-px bg-white/30 sm:block" />
                     <Link
                         href={CONTACT_INFO.whatsapp.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
                         className="flex items-center gap-1.5 transition-colors hover:text-brand-cyan"
                     >
-                        <MessageCircle className="h-3.5 w-3.5" />
+                        <WhatsAppIcon className="h-3.5 w-3.5" />
                         <span>WhatsApp Ventas</span>
                     </Link>
                 </div>

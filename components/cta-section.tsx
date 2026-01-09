@@ -1,5 +1,6 @@
 import Link from "next/link"
-import { ArrowRight, MessageCircle } from "lucide-react"
+import { WhatsAppIcon } from "@/components/icons/whatsapp-icon"
+import { ArrowRight } from "lucide-react"
 import { CONTACT_INFO } from "@/lib/config"
 
 export function CtaSection() {
@@ -43,7 +44,7 @@ export function CtaSection() {
                                 className="group inline-flex h-14 items-center justify-center rounded-full bg-[#25D366] px-8 text-base font-bold text-white shadow-lg transition-all hover:bg-[#20bd5a] hover:scale-105 hover:shadow-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50"
                             >
                                 <span className="flex items-center gap-2">
-                                    <MessageCircle className="h-5 w-5" />
+                                    <WhatsAppIcon className="h-5 w-5" />
                                     Hablemos por WhatsApp
                                 </span>
                             </Link>

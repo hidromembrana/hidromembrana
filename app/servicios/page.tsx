@@ -5,12 +5,13 @@ import {
     ShieldCheck,
     Wrench,
     ArrowRight,
-    MessageCircle,
+
 } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { CtaSection } from "@/components/cta-section"
 import { AddToCartDialog } from "@/components/add-to-cart-dialog"
 import { PRODUCTS } from "@/lib/products"
+import { WhatsAppIcon } from "@/components/icons/whatsapp-icon"
 import Link from "next/link"
 
 function ServiceAction({ service }: { service: ServiceItem }) {
@@ -78,7 +79,7 @@ const SERVICES: ServiceItem[] = [
         id: "expert-consultation",
         title: "¿Dudas con tu Proyecto?",
         description: "No arriesgues tu obra. Nuestros ingenieros te ayudan a calcular espesores y cubicaciones gratis.",
-        icon: MessageCircle,
+        icon: WhatsAppIcon,
         color: "bg-primary text-primary-foreground",
         colSpan: "md:col-span-1",
         isCta: true
