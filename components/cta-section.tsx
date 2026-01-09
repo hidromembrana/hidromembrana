@@ -1,4 +1,5 @@
 import Link from "next/link"
+import { LeadCaptureLink } from "@/components/lead-capture-link"
 import { WhatsAppIcon } from "@/components/icons/whatsapp-icon"
 import { ArrowRight } from "lucide-react"
 import { CONTACT_INFO } from "@/lib/config"
@@ -29,7 +30,7 @@ export function CtaSection() {
                         </p>
 
                         <div className="flex flex-col items-center justify-center gap-4 sm:flex-row sm:gap-6">
-                            <Link
+                            <LeadCaptureLink
                                 href="/cotizar"
                                 className="group relative inline-flex h-14 items-center justify-center overflow-hidden rounded-full bg-white px-8 text-base font-bold text-brand-blue shadow-lg transition-all hover:bg-zinc-50 hover:scale-105 hover:shadow-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50"
                             >
@@ -37,7 +38,7 @@ export function CtaSection() {
                                     Solicitar Cotización
                                     <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
                                 </span>
-                            </Link>
+                            </LeadCaptureLink>
 
                             <Link
                                 href={CONTACT_INFO.whatsapp.url}

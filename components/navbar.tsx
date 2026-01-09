@@ -6,6 +6,7 @@ import Image from "next/image"
 import { usePathname } from "next/navigation"
 import { Menu, X } from "lucide-react"
 import { ThemeToggle } from "./theme-toggle"
+import { LeadCaptureLink } from "@/components/lead-capture-link"
 
 const navLinks = [
     { href: "/", label: "Inicio" },
@@ -35,6 +36,11 @@ export function Navbar() {
     const [isOpen, setIsOpen] = React.useState(false)
     const pathname = usePathname()
 
+    // Close mobile menu when route changes
+    React.useEffect(() => {
+        setIsOpen(false)
+    }, [pathname])
+
     return (
         <nav className="sticky top-0 z-50 w-full border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
             <div className="container mx-auto flex h-16 items-center justify-between px-4">
@@ -45,6 +51,7 @@ export function Navbar() {
                             src="/logo.png"
                             alt="Hidromembrana Logo"
                             fill
+                            sizes="48px"
                             className="object-contain"
                         />
                     </div>
@@ -69,13 +76,13 @@ export function Navbar() {
                         </Link>
                     ))}
                     <ThemeToggle />
-                    <Link
+                    <LeadCaptureLink
                         href="/cotizar"
                         className="relative rounded-full bg-brand-blue px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-brand-cyan flex items-center gap-2"
                     >
                         <span>Cotizar</span>
                         <CartBadge />
-                    </Link>
+                    </LeadCaptureLink>
                 </div>
 
                 {/* Mobile Menu Button */}
@@ -106,7 +113,7 @@ export function Navbar() {
                             </Link>
                         ))}
                         <div className="flex items-center justify-between">
-                            <Link
+                            <LeadCaptureLink
                                 href="/cotizar"
                                 className="inline-flex items-center justify-center rounded-md bg-brand-blue px-4 py-2 text-sm font-medium text-white hover:bg-brand-cyan"
                                 onClick={() => setIsOpen(false)}
@@ -115,7 +122,7 @@ export function Navbar() {
                                 <div className="ml-2 inline-flex">
                                     <CartBadge />
                                 </div>
-                            </Link>
+                            </LeadCaptureLink>
                             <ThemeToggle />
                         </div>
                     </div>
