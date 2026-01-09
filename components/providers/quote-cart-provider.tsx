@@ -102,6 +102,7 @@ export function useQuoteCart() {
     const [isHydrated, setIsHydrated] = useState(false)
 
     useEffect(() => {
+        // eslint-disable-next-line react-hooks/exhaustive-deps
         useQuoteCartStore.persist.rehydrate()
         setIsHydrated(true)
     }, [])

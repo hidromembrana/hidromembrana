@@ -1,9 +1,8 @@
 "use client"
 
-import { useState } from "react"
 import Link from "next/link"
 import Image from "next/image"
-import { CheckCircle2, ArrowRight, Play, ZoomIn } from "lucide-react"
+import { ArrowRight } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
@@ -13,76 +12,41 @@ import { CtaSection } from "@/components/cta-section"
 interface Project {
     id: string
     title: string
+    specs: string // New field for specific technical details (e.g. dimensions)
     category: string
-    videoThumbnail: string // Placeholder for video
-    images: string[]
-    challenge: string
-    solution: string
-    result: string
-    reversed?: boolean // For zig-zag control
+    image: string // Single image
+    description: string
+    reversed?: boolean
 }
 
 // --- Data ---
 const PROJECTS: Project[] = [
     {
         id: "tranques-mineria",
-        title: "Revestimiento Tranque de Relaves Minera Norte",
+        title: "Revestimiento Tranque de Relaves",
+        specs: "50.000 m² - Geomembrana HDPE 2.0mm",
         category: "Minería",
-        videoThumbnail: "/images/projects/project-mining-video-thumb.webp", // Mock path
-        images: [
-            "/images/projects/mining-1.webp",
-            "/images/projects/mining-2.webp",
-            "/images/projects/mining-3.webp"
-        ],
-        challenge: "Filtraciones críticas en tranque de 50.000 m³ ponían en riesgo la licencia ambiental por contaminación de napas.",
-        solution: "Instalación de doble capa de Geomembrana HDPE 2.0mm texturada con sistema de detección de fugas geoeléctrico.",
-        result: "Cero filtraciones certificadas. Continuidad operativa asegurada y cumplimiento total de la normativa ambiental.",
+        image: "/images/projects/mining-1.webp",
+        description: "Impermeabilización de alta seguridad para contención de relaves. Se aseguró la estanqueidad total mediante soldadura por termofusión y control de calidad geoeléctrico, garantizando el cumplimiento de la normativa ambiental vigente.",
         reversed: false
     },
     {
         id: "embalse-agricola",
-        title: "Impermeabilización Mega-Embalse Agrícola Valle Central",
+        title: "Mega-Embalse Valle Central",
+        specs: "120.000 m² - HDPE 1.5mm + Geotextil",
         category: "Agrícola",
-        videoThumbnail: "/images/projects/project-agri-video-thumb.webp",
-        images: [
-            "/images/projects/agri-1.webp",
-            "/images/projects/agri-2.webp",
-            "/images/projects/agri-3.webp"
-        ],
-        challenge: "Pérdida del 30% del recurso hídrico por infiltración en suelo arenoso, afectando el riego de 500 hectáreas.",
-        solution: "Geomembrana HDPE 1.0mm con geotextil no tejido 200g para protección mecánica contra suelo rocoso.",
-        result: "Recuperación del 100% de la capacidad de retención. Aumento de la superficie de riego disponible.",
+        image: "/images/projects/agri-1.webp",
+        description: "Proyecto de acumulación de agua para riego de 500 hectáreas. Instalación sobre suelo complejo utilizando geotextil no tejido para protección mecánica. La obra se entregó 2 semanas antes del plazo, asegurando la temporada de riego.",
         reversed: true
     },
     {
         id: "planta-tratamiento",
-        title: "Lagunas de Oxidación Planta de Tratamiento",
+        title: "Lagunas de Oxidación",
+        specs: "15.000 m² - Reparación y Revestimiento",
         category: "Sanitario",
-        videoThumbnail: "/images/projects/project-water-video-thumb.webp",
-        images: [
-            "/images/projects/water-1.webp",
-            "/images/projects/water-2.webp",
-            "/images/projects/water-3.webp"
-        ],
-        challenge: "Rehabilitación de lagunas con hormigón fisurado. Necesidad de intervención rápida sin detener la planta.",
-        solution: "Instalación flotante y anclaje mecánico perimetral. Uso de soldadura por extrusión en puntos críticos.",
-        result: "Extensión de vida útil de la infraestructura por 20 años. Operación ininterrumpida durante la obra.",
+        image: "/images/projects/water-1.webp",
+        description: "Rehabilitación de lagunas de tratamiento con infraestructura en operación. Se utilizaron técnicas de instalación flotante y anclaje mecánico en hormigón para extender la vida útil de la planta por 20 años más.",
         reversed: false
-    },
-    {
-        id: "techumbre-industrial",
-        title: "Impermeabilización Techumbre Industrial Galpón Logístico",
-        category: "Construcción",
-        videoThumbnail: "/images/projects/project-roof-video-thumb.webp",
-        images: [
-            "/images/projects/roof-1.webp",
-            "/images/projects/roof-2.webp",
-            "/images/projects/roof-3.webp"
-        ],
-        challenge: "Filtraciones de lluvia dañando stock de alto valor. Cubierta metálica antigua con óxido avanzado.",
-        solution: "Sobre-techo con Membrana PVC reforzada, resistente a UV y tránsito para mantenimiento.",
-        result: "Protección total del inventario. Aislación térmica mejorada reduciendo temperatura interior en 5°C.",
-        reversed: true
     }
 ]
 
@@ -90,43 +54,21 @@ const PROJECTS: Project[] = [
 
 function ProjectMultimedia({ project }: { project: Project }) {
     return (
-        <div className="flex flex-col gap-4 w-full">
-            {/* Video / Main Media Area */}
-            <div className="group relative w-full aspect-video bg-zinc-900 rounded-xl overflow-hidden shadow-lg border border-zinc-800">
-                {/* Placeholder for Video - In real app would be <video> or <iframe> */}
-                <div className="absolute inset-0 flex items-center justify-center bg-zinc-800/50 group-hover:bg-zinc-800/40 transition-colors cursor-pointer">
-                    <div className="h-16 w-16 md:h-20 md:w-20 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center transition-transform group-hover:scale-110">
-                        <Play className="h-8 w-8 md:h-10 md:w-10 text-white ml-1 fill-white" />
-                    </div>
-                </div>
-                <div className="absolute bottom-4 left-4 right-4 text-white text-sm font-medium bg-black/60 backdrop-blur-md px-3 py-2 rounded-lg w-fit">
-                    Ver Video del Proyecto
-                </div>
-                {/* Fallback Image if needed */}
-                {/* <Image src={project.videoThumbnail} fill className="object-cover opacity-50" alt="Video thumbnail" /> */}
+        <div className="w-full aspect-video md:aspect-[16/10] relative rounded-2xl overflow-hidden shadow-2xl border border-zinc-200 dark:border-zinc-800 group">
+            <div className="absolute inset-0 bg-zinc-200 dark:bg-zinc-800 animate-pulse" /> {/* Loading state placeholder */}
+            {/* Using generic placeholder path in src, in real app ensure these files exist or use a service */}
+            {/* For now using a colored div placeholder representation if image fails or for immediate visual */}
+            <div className={`absolute inset-0 bg-gradient-to-br ${project.category === 'Minería' ? 'from-slate-800 to-slate-900' : project.category === 'Agrícola' ? 'from-emerald-900 to-emerald-950' : 'from-cyan-900 to-blue-950'} flex items-center justify-center`}>
+                <span className="text-white/20 font-bold text-4xl uppercase tracking-widest">{project.category}</span>
             </div>
-
-            {/* Image Grid */}
-            <div className="grid grid-cols-3 gap-3">
-                {project.images.map((img, idx) => (
-                    <div key={idx} className="group relative aspect-[4/3] bg-zinc-100 dark:bg-zinc-800 rounded-lg overflow-hidden cursor-zoom-in shadow-sm border border-zinc-200 dark:border-zinc-700">
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity z-10" />
-                        {/* Placeholder Image Div */}
-                        <div className="w-full h-full bg-zinc-200 dark:bg-zinc-800 flex items-center justify-center text-zinc-400 group-hover:scale-110 transition-transform duration-500">
-                            <span className="text-xs">Img {idx + 1}</span>
-                        </div>
-                        {/* Actual Image Tag (Commented out until real images exist to avoid broken img icons) */}
-                        {/* 
-                        <Image 
-                            src={img} 
-                            alt={`Detalle ${idx + 1}`} 
-                            fill 
-                            className="object-cover transition-transform duration-500 group-hover:scale-110" 
-                        /> 
-                        */}
-                    </div>
-                ))}
-            </div>
+            {/* Actual Image component - Uncomment and ensure paths exist 
+            <Image 
+                src={project.image} 
+                alt={project.title} 
+                fill 
+                className="object-cover transition-transform duration-700 group-hover:scale-105"
+            />
+            */}
         </div>
     )
 }
@@ -135,51 +77,25 @@ function ProjectContent({ project }: { project: Project }) {
     return (
         <div className="flex flex-col justify-center h-full space-y-6">
             <div>
-                <Badge variant="secondary" className="mb-4 px-3 py-1 text-sm font-medium bg-brand-blue/10 text-brand-blue hover:bg-brand-blue/20 border-brand-blue/20">
-                    {project.category}
-                </Badge>
-                <h3 className="text-3xl font-bold tracking-tight text-foreground md:text-4xl leading-tight">
+                <div className="flex items-center gap-3 mb-4">
+                    <Badge variant="secondary" className="px-3 py-1 text-sm font-medium bg-brand-blue/10 text-brand-blue border-brand-blue/20">
+                        {project.category}
+                    </Badge>
+                    <span className="text-sm font-semibold text-muted-foreground border-l border-zinc-300 pl-3">
+                        {project.specs}
+                    </span>
+                </div>
+
+                <h3 className="text-3xl font-bold tracking-tight text-foreground md:text-4xl leading-tight mb-4">
                     {project.title}
                 </h3>
+
+                <p className="text-lg text-muted-foreground leading-relaxed">
+                    {project.description}
+                </p>
             </div>
 
-            <div className="space-y-4">
-                <div className="flex gap-3">
-                    <div className="mt-1 flex-shrink-0">
-                        <div className="flex h-6 w-6 items-center justify-center rounded-full bg-red-100 dark:bg-red-900/30">
-                            <span className="text-red-600 dark:text-red-400 font-bold text-xs">!</span>
-                        </div>
-                    </div>
-                    <div>
-                        <span className="font-bold text-foreground block mb-1">El Desafío</span>
-                        <p className="text-muted-foreground leading-relaxed">{project.challenge}</p>
-                    </div>
-                </div>
-
-                <div className="flex gap-3">
-                    <div className="mt-1 flex-shrink-0">
-                        <CheckCircle2 className="h-6 w-6 text-brand-cyan" />
-                    </div>
-                    <div>
-                        <span className="font-bold text-foreground block mb-1">La Solución</span>
-                        <p className="text-muted-foreground leading-relaxed">{project.solution}</p>
-                    </div>
-                </div>
-
-                <div className="flex gap-3">
-                    <div className="mt-1 flex-shrink-0">
-                        <div className="flex h-6 w-6 items-center justify-center rounded-full bg-green-100 dark:bg-green-900/30">
-                            <CheckCircle2 className="h-4 w-4 text-green-600 dark:text-green-400" />
-                        </div>
-                    </div>
-                    <div>
-                        <span className="font-bold text-foreground block mb-1">Resultado</span>
-                        <p className="text-muted-foreground leading-relaxed">{project.result}</p>
-                    </div>
-                </div>
-            </div>
-
-            <div className="pt-4">
+            <div className="pt-2">
                 <Link href="/contacto">
                     <Button variant="outline" className="group border-brand-blue text-brand-blue hover:bg-brand-blue hover:text-white transition-all">
                         Cotizar proyecto similar

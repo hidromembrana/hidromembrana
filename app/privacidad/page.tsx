@@ -20,7 +20,7 @@ export default function PrivacidadPage() {
 
                     <h2 className="text-2xl font-bold mt-8 mb-4 text-foreground">1. Información Recolectada</h2>
                     <p className="text-muted-foreground leading-relaxed mb-4">
-                        A través de nuestros formularios de "Contacto" y "Cotizador", recolectamos la siguiente información necesaria para la gestión comercial:
+                        A través de nuestros formularios de &quot;Contacto&quot; y &quot;Cotizador&quot;, recolectamos la siguiente información necesaria para la gestión comercial:
                     </p>
                     <ul className="list-disc pl-6 space-y-2 mt-2 text-muted-foreground mb-4">
                         <li><strong>Datos de Identificación:</strong> Nombre completo, correo electrónico y número de teléfono.</li>
