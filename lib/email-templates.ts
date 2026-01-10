@@ -1,6 +1,6 @@
 
 export const generateContactEmail = (data: any) => {
-    return `
+  return `
     <div style="font-family: Arial, sans-serif; color: #333;">
       <h2 style="color: #004e98;">📩 Nuevo Mensaje de Contacto</h2>
       <p>Has recibido un nuevo mensaje desde el formulario de contacto:</p>
@@ -18,7 +18,7 @@ export const generateContactEmail = (data: any) => {
 };
 
 export const generateLeadEmail = (data: any) => {
-    return `
+  return `
     <div style="font-family: Arial, sans-serif; color: #333;">
       <h2 style="color: #2e7d32;">🚀 Nuevo Lead Capturado</h2>
       <p>Un usuario ha iniciado el proceso de cotización o dejado sus datos:</p>
@@ -33,19 +33,48 @@ export const generateLeadEmail = (data: any) => {
 };
 
 export const generateQuotationEmail = (data: any) => {
-    const { customer, items } = data;
+  const { customer, items } = data;
 
-    const itemsHtml = items.map((item: any) => `
+  const translations: Record<string, string> = {
+    length: 'Largo',
+    width: 'Ancho',
+    height: 'Altura',
+    anchorage: 'Anclaje',
+    slope: 'Talud',
+    squareMeters: 'Metros Cuadrados',
+    diameter: 'Diámetro',
+    format: 'Formato',
+    hasMaterial: '¿Tiene Material?',
+    materialType: 'Tipo de Material',
+    yes: 'Sí, solo instalación',
+    no: 'No, necesito materiales',
+    'geomembrana-hdpe': 'Geomembrana HDPE',
+    'geotextil': 'Geotextil',
+    '10kg': 'Rollo 10 Kg',
+    '15kg': 'Rollo 15 Kg',
+    '4mm': '4 mm',
+    '5mm': '5 mm',
+    '6mm': '6 mm'
+  };
+
+  const itemsHtml = items.map((item: any) => {
+    const configEntries = Object.entries(item.config || {}).map(([k, v]) => {
+      const key = translations[k] || k;
+      const value = translations[v as string] || v;
+      return `${key}: ${value}`;
+    });
+
+    return `
     <tr style="border-bottom: 1px solid #eee;">
       <td style="padding: 10px;">${item.productName}</td>
       <td style="padding: 10px;">${item.quantity}</td>
       <td style="padding: 10px; font-size: 0.9em; color: #666;">
-        ${Object.entries(item.config || {}).map(([k, v]) => `${k}: ${v}`).join(', ')}
+        ${configEntries.join(', ')}
       </td>
     </tr>
-  `).join('');
+  `}).join('');
 
-    return `
+  return `
     <div style="font-family: Arial, sans-serif; color: #333;">
       <h2 style="color: #ff6f00;">💰 Nueva Solicitud de Cotización</h2>
       
