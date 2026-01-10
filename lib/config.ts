@@ -1,4 +1,4 @@
-export const IS_UNDER_CONSTRUCTION = process.env.IS_UNDER_CONSTRUCTION || false;
+export const IS_UNDER_CONSTRUCTION = process.env.NEXT_PUBLIC_IS_UNDER_CONSTRUCTION || false;
 
 export const CONTACT_INFO = {
     whatsapp: {
