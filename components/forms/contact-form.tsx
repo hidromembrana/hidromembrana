@@ -130,7 +130,7 @@ export function ContactForm() {
 
                 <div className="flex justify-center">
                     <Turnstile
-                        siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || ""}
+                        siteKey={process.env.TURNSTILE_SITE_KEY || ""}
                         onSuccess={(token) => setToken(token)}
                         onError={() => setToken(null)}
                         onExpire={() => setToken(null)}
