@@ -10,5 +10,5 @@ export const CONTACT_INFO = {
         }
     },
     email: "contacto@hidromembrana.cl",
-    address: "Región Metropolitana, Chile" // Generic for now
+    address: "Ovalle, Chile"
 };
