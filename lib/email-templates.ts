@@ -81,7 +81,7 @@ export const generateQuotationEmail = (data: any) => {
       <h3>Datos del Cliente</h3>
       <ul>
         <li><strong>Nombre:</strong> ${customer.name}</li>
-        <li><strong>Empresa:</strong> ${customer.company || 'Particular'}</li>
+        <li><strong>Empresa:</strong> ${customer.company || 'No Indicado'}</li>
         <li><strong>Email:</strong> ${customer.email}</li>
         <li><strong>Teléfono:</strong> ${customer.phone}</li>
         <li><strong>Ubicación:</strong> ${customer.location}</li>
