@@ -22,30 +22,30 @@ interface Project {
 // --- Data ---
 const PROJECTS: Project[] = [
     {
-        id: "tranques-mineria",
-        title: "Revestimiento Tranque de Relaves",
-        specs: "50.000 m² - Geomembrana HDPE 2.0mm",
-        category: "Minería",
-        image: "/images/projects/mining-1.webp",
-        description: "Impermeabilización de alta seguridad para contención de relaves. Se aseguró la estanqueidad total mediante soldadura por termofusión y control de calidad geoeléctrico, garantizando el cumplimiento de la normativa ambiental vigente.",
+        id: "riego-intensivo-sur",
+        title: "Sistema de Riego Intensivo Zona Sur",
+        specs: "80.000 m² - HDPE 1.0mm",
+        category: "Agrícola",
+        image: "/proyetos/proyecto1.webp",
+        description: "Implementación de tranque acumulador para riego de berries. Se optimizó el recurso hídrico mediante revestimiento con HDPE de 1.0mm, garantizando cero infiltración y asegurando la disponibilidad de agua para la temporada estival.",
         reversed: false
     },
     {
-        id: "embalse-agricola",
-        title: "Mega-Embalse Valle Central",
-        specs: "120.000 m² - HDPE 1.5mm + Geotextil",
+        id: "revestimiento-frutales",
+        title: "Reserva Hídrica Frutales de Exportación",
+        specs: "45.000 m² - HDPE 1.5mm Texturado",
         category: "Agrícola",
-        image: "/images/projects/agri-1.webp",
-        description: "Proyecto de acumulación de agua para riego de 500 hectáreas. Instalación sobre suelo complejo utilizando geotextil no tejido para protección mecánica. La obra se entregó 2 semanas antes del plazo, asegurando la temporada de riego.",
+        image: "/proyetos/proyecto2.webp",
+        description: "Construcción y revestimiento de embalse para cerezos de exportación. Uso de geomembrana texturada para aumentar la fricción en taludes pronunciados, mejorando la seguridad y estabilidad de la obra a largo plazo.",
         reversed: true
     },
     {
-        id: "planta-tratamiento",
-        title: "Lagunas de Oxidación",
-        specs: "15.000 m² - Reparación y Revestimiento",
-        category: "Sanitario",
-        image: "/images/projects/water-1.webp",
-        description: "Rehabilitación de lagunas de tratamiento con infraestructura en operación. Se utilizaron técnicas de instalación flotante y anclaje mecánico en hormigón para extender la vida útil de la planta por 20 años más.",
+        id: "canal-alimentador",
+        title: "Impermeabilización Estanque de Regulación",
+        specs: "60.000 m² - HDPE 1.0mm + Geotextil 250g",
+        category: "Agrícola",
+        image: "/proyetos/proyecto3.webp",
+        description: "Proyecto integral de impermeabilización para un estanque de regulación nocturna. Se instaló geotextil de protección bajo la geomembrana para mitigar el riesgo de punzonamiento por el sustrato rocoso de la zona.",
         reversed: false
     }
 ]
@@ -56,19 +56,16 @@ function ProjectMultimedia({ project }: { project: Project }) {
     return (
         <div className="w-full aspect-video md:aspect-[16/10] relative rounded-2xl overflow-hidden shadow-2xl border border-zinc-200 dark:border-zinc-800 group">
             <div className="absolute inset-0 bg-zinc-200 dark:bg-zinc-800 animate-pulse" /> {/* Loading state placeholder */}
-            {/* Using generic placeholder path in src, in real app ensure these files exist or use a service */}
-            {/* For now using a colored div placeholder representation if image fails or for immediate visual */}
-            <div className={`absolute inset-0 bg-gradient-to-br ${project.category === 'Minería' ? 'from-slate-800 to-slate-900' : project.category === 'Agrícola' ? 'from-emerald-900 to-emerald-950' : 'from-cyan-900 to-blue-950'} flex items-center justify-center`}>
-                <span className="text-white/20 font-bold text-4xl uppercase tracking-widest">{project.category}</span>
-            </div>
-            {/* Actual Image component - Uncomment and ensure paths exist 
-            <Image 
-                src={project.image} 
-                alt={project.title} 
-                fill 
+
+            <Image
+                src={project.image}
+                alt={project.title}
+                fill
+                sizes="(max-width: 768px) 100vw, 60vw"
                 className="object-cover transition-transform duration-700 group-hover:scale-105"
             />
-            */}
+
+            {/* Overlay for category badge if image loads fast, or just rely on the badge next to title */}
         </div>
     )
 }
