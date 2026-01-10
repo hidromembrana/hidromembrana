@@ -4,7 +4,7 @@ import { ArrowLeft, CheckCircle } from "lucide-react"
 import { PRODUCTS } from "@/lib/products"
 import { CtaSection } from "@/components/cta-section"
 import { ProductGallery } from "@/components/product-gallery"
-import { AddToCartDialog } from "@/components/add-to-cart-dialog"
+import { AddToCartButton } from "@/components/add-to-cart-button"
 
 export function generateStaticParams() {
     return PRODUCTS.map((product) => ({
@@ -66,11 +66,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
                             <p className="text-sm text-muted-foreground mb-4">
                                 Nuestros expertos pueden asesorarte sobre la mejor solución para tu proyecto.
                             </p>
-                            <AddToCartDialog product={product}>
-                                <button className="inline-flex h-10 w-full items-center justify-center rounded-md bg-brand-blue px-4 py-2 text-sm font-medium text-white hover:bg-brand-cyan transition-colors cursor-pointer">
-                                    Cotizar {product.title}
-                                </button>
-                            </AddToCartDialog>
+                            <AddToCartButton product={product} />
                         </div>
                     </div>
                 </div>
