@@ -11,13 +11,41 @@ const CONTACT_EMAIL = process.env.FROM_CONTACT_FORM_EMAIL || 'onboarding@resend.
 export async function POST(request: Request) {
     try {
         const body = await request.json();
-        const { type, payload } = body;
+        const { type, payload, token } = body;
 
         if (!type || !payload) {
             return NextResponse.json(
                 { error: 'Missing type or payload' },
                 { status: 400 }
             );
+        }
+
+        // Verify Turnstile Token for Contact Form
+        if (type === 'contact') {
+            if (!token) {
+                return NextResponse.json(
+                    { error: 'Captcha requerido' },
+                    { status: 400 }
+                );
+            }
+
+            const formData = new FormData();
+            formData.append('secret', process.env.TURNSTILE_SECRET_KEY || '');
+            formData.append('response', token);
+            formData.append('remoteip', request.headers.get('x-forwarded-for') || '');
+
+            const turnstileResult = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
+                method: 'POST',
+                body: formData,
+            });
+
+            const outcome = await turnstileResult.json();
+            if (!outcome.success) {
+                return NextResponse.json(
+                    { error: 'Captcha inválido' },
+                    { status: 400 }
+                );
+            }
         }
 
         let fromEmail = '';

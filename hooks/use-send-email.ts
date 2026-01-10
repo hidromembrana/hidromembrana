@@ -6,7 +6,7 @@ import { toast } from "sonner"
 type EmailType = 'contact' | 'lead' | 'quotation'
 
 interface UseSendEmailResult {
-    sendEmail: (type: EmailType, payload: any) => Promise<boolean>
+    sendEmail: (type: EmailType, payload: any, token?: string) => Promise<boolean>
     isSubmitting: boolean
     isSuccess: boolean
     error: string | null
@@ -23,7 +23,7 @@ export function useSendEmail(): UseSendEmailResult {
         setError(null)
     }
 
-    const sendEmail = async (type: EmailType, payload: any): Promise<boolean> => {
+    const sendEmail = async (type: EmailType, payload: any, token?: string): Promise<boolean> => {
         setIsSubmitting(true)
         setError(null)
 
@@ -33,7 +33,8 @@ export function useSendEmail(): UseSendEmailResult {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
                     type,
-                    payload
+                    payload,
+                    token
                 })
             });
 

@@ -20,8 +20,12 @@ import { Loader2, CheckCircle2 } from "lucide-react"
 
 
 
+import { useState } from "react"
+import { Turnstile } from "@marsidev/react-turnstile"
+
 export function ContactForm() {
     const { sendEmail, isSubmitting, isSuccess, reset } = useSendEmail()
+    const [token, setToken] = useState<string | null>(null)
 
     const form = useForm<ContactFormValues>({
         resolver: zodResolver(contactFormSchema),
@@ -34,9 +38,14 @@ export function ContactForm() {
     })
 
     async function onSubmit(values: ContactFormValues) {
-        const success = await sendEmail('contact', values)
+        if (!token) {
+            form.setError("root", { message: "Por favor completa el captcha." })
+            return
+        }
+        const success = await sendEmail('contact', values, token)
         if (success) {
             form.reset()
+            setToken(null) // Reset token on success
         }
     }
 
@@ -119,7 +128,20 @@ export function ContactForm() {
                     )}
                 />
 
-                <Button type="submit" className="w-full" disabled={isSubmitting}>
+                <div className="flex justify-center">
+                    <Turnstile
+                        siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || ""}
+                        onSuccess={(token) => setToken(token)}
+                        onError={() => setToken(null)}
+                        onExpire={() => setToken(null)}
+                    />
+                </div>
+
+                {form.formState.errors.root && (
+                    <p className="text-destructive text-sm text-center">{form.formState.errors.root.message}</p>
+                )}
+
+                <Button type="submit" className="w-full" disabled={isSubmitting || !token}>
                     {isSubmitting ? (
                         <>
                             <Loader2 className="mr-2 h-4 w-4 animate-spin" />
