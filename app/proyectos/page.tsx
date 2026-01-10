@@ -22,12 +22,12 @@ interface Project {
 // --- Data ---
 const PROJECTS: Project[] = [
     {
-        id: "riego-intensivo-sur",
-        title: "Sistema de Riego Intensivo Zona Sur",
+        id: "riego-intensivo-norte",
+        title: "Tranque Acumulador Zona Norte",
         specs: "80.000 m² - HDPE 1.0mm",
         category: "Agrícola",
         image: "/proyetos/proyecto1.webp",
-        description: "Implementación de tranque acumulador para riego de berries. Se optimizó el recurso hídrico mediante revestimiento con HDPE de 1.0mm, garantizando cero infiltración y asegurando la disponibilidad de agua para la temporada estival.",
+        description: "Construcción de reservorio estratégico en zona de escasez hídrica. Se aseguró la estanqueidad total con HDPE 1.0mm para maximizar la eficiencia del riego en cultivos de alta demanda característicos de la región.",
         reversed: false
     },
     {
@@ -36,7 +36,7 @@ const PROJECTS: Project[] = [
         specs: "45.000 m² - HDPE 1.5mm Texturado",
         category: "Agrícola",
         image: "/proyetos/proyecto2.webp",
-        description: "Construcción y revestimiento de embalse para cerezos de exportación. Uso de geomembrana texturada para aumentar la fricción en taludes pronunciados, mejorando la seguridad y estabilidad de la obra a largo plazo.",
+        description: "Revestimiento de embalse en ladera con geomembrana texturada. La superficie rugosa mejora la tracción y estabilidad del talud, crucial para la seguridad en terrenos con pendiente pronunciada.",
         reversed: true
     },
     {
