@@ -55,6 +55,7 @@ function CartItemRow({ item, onRemove }: { item: CartItem; onRemove: () => void 
                         src={product.images[0]}
                         alt={product.title}
                         fill
+                        sizes="80px"
                         className="object-cover"
                     />
                 ) : (
