@@ -1,5 +1,6 @@
 "use client"
 
+import { useEffect } from "react"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useQuoteCart } from "@/components/providers/quote-cart-provider"
@@ -33,6 +34,15 @@ export function QuotationForm() {
             details: "",
         },
     })
+
+    // Sync form with persisted contact info when it loads
+    useEffect(() => {
+        if (contactInfo.isSaved) {
+            form.setValue("name", contactInfo.name)
+            form.setValue("email", contactInfo.email)
+            form.setValue("phone", contactInfo.phone)
+        }
+    }, [contactInfo, form])
 
     async function onSubmit(values: QuotationFormValues) {
         if (items.length === 0) {
