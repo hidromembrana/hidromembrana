@@ -6,6 +6,7 @@ import Image from "next/image"
 import { usePathname } from "next/navigation"
 import { Menu, X } from "lucide-react"
 import { ThemeToggle } from "./theme-toggle"
+import { LeadCaptureLink } from "@/components/lead-capture-link"
 
 const navLinks = [
     { href: "/", label: "Inicio" },
@@ -16,9 +17,29 @@ const navLinks = [
     { href: "/contacto", label: "Contacto" },
 ]
 
+import { useQuoteCart } from "@/components/providers/quote-cart-provider"
+import { ShoppingCart } from "lucide-react"
+
+function CartBadge() {
+    const { points } = useQuoteCart()
+
+    if (points === 0) return <ShoppingCart className="h-4 w-4" />
+
+    return (
+        <div className="flex items-center justify-center w-5 h-5 rounded-full bg-white text-brand-blue text-xs font-bold">
+            {points}
+        </div>
+    )
+}
+
 export function Navbar() {
     const [isOpen, setIsOpen] = React.useState(false)
     const pathname = usePathname()
+
+    // Close mobile menu when route changes
+    React.useEffect(() => {
+        setIsOpen(false)
+    }, [pathname])
 
     return (
         <nav className="sticky top-0 z-50 w-full border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -30,6 +51,7 @@ export function Navbar() {
                             src="/logo.png"
                             alt="Hidromembrana Logo"
                             fill
+                            sizes="48px"
                             className="object-contain"
                         />
                     </div>
@@ -40,7 +62,8 @@ export function Navbar() {
 
                 {/* Desktop Nav */}
                 <div className="hidden md:flex md:items-center md:space-x-6">
-                    {navLinks.map((link) => (
+                    {/* Show links only if NOT on home page */}
+                    {pathname !== "/" && navLinks.map((link) => (
                         <Link
                             key={link.href}
                             href={link.href}
@@ -53,12 +76,13 @@ export function Navbar() {
                         </Link>
                     ))}
                     <ThemeToggle />
-                    <Link
+                    <LeadCaptureLink
                         href="/cotizar"
-                        className="rounded-full bg-brand-blue px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-brand-cyan"
+                        className="relative rounded-full bg-brand-blue px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-brand-cyan flex items-center gap-2"
                     >
-                        Cotizar
-                    </Link>
+                        <span>Cotizar</span>
+                        <CartBadge />
+                    </LeadCaptureLink>
                 </div>
 
                 {/* Mobile Menu Button */}
@@ -75,7 +99,7 @@ export function Navbar() {
             {isOpen && (
                 <div className="border-t border-border bg-background md:hidden">
                     <div className="container mx-auto flex flex-col space-y-4 p-4">
-                        {navLinks.map((link) => (
+                        {pathname !== "/" && navLinks.map((link) => (
                             <Link
                                 key={link.href}
                                 href={link.href}
@@ -89,13 +113,16 @@ export function Navbar() {
                             </Link>
                         ))}
                         <div className="flex items-center justify-between">
-                            <Link
+                            <LeadCaptureLink
                                 href="/cotizar"
                                 className="inline-flex items-center justify-center rounded-md bg-brand-blue px-4 py-2 text-sm font-medium text-white hover:bg-brand-cyan"
                                 onClick={() => setIsOpen(false)}
                             >
                                 Cotizar
-                            </Link>
+                                <div className="ml-2 inline-flex">
+                                    <CartBadge />
+                                </div>
+                            </LeadCaptureLink>
                             <ThemeToggle />
                         </div>
                     </div>

@@ -3,11 +3,10 @@ import { PRODUCTS } from "@/lib/products"
 import { ProductCard } from "@/components/product-card"
 
 export function FeaturedProducts() {
-    // Select top 3 products for the homepage
     const featured = PRODUCTS.slice(0, 3);
 
     return (
-        <section className="bg-surface py-20">
+        <section className="bg-surface py-12 md:py-16">
             <div className="container mx-auto px-4 md:px-6">
                 <div className="flex flex-col items-center justify-center space-y-4 text-center">
                     <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">
@@ -17,7 +16,7 @@ export function FeaturedProducts() {
                         Ofrecemos soluciones de alta calidad para garantizar la estanqueidad y durabilidad de sus obras.
                     </p>
                 </div>
-                <div className="mx-auto grid max-w-5xl gap-6 py-12 md:grid-cols-3">
+                <div className="mx-auto grid max-w-5xl gap-6 py-8 md:grid-cols-3">
                     {featured.map((product) => (
                         <ProductCard key={product.id} product={product} />
                     ))}

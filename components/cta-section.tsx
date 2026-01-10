@@ -1,10 +1,12 @@
 import Link from "next/link"
-import { ArrowRight, MessageCircle } from "lucide-react"
+import { LeadCaptureLink } from "@/components/lead-capture-link"
+import { WhatsAppIcon } from "@/components/icons/whatsapp-icon"
+import { ArrowRight } from "lucide-react"
 import { CONTACT_INFO } from "@/lib/config"
 
 export function CtaSection() {
     return (
-        <section className="relative overflow-hidden py-24 lg:py-32">
+        <section className="relative overflow-hidden py-16 lg:py-24">
             {/* Background with Gradient and Texture */}
             <div className="absolute inset-0 z-0">
                 <div className="absolute inset-0 bg-gradient-to-br from-brand-blue via-brand-blue/90 to-brand-cyan/80" />
@@ -17,7 +19,7 @@ export function CtaSection() {
             <div className="absolute bottom-0 left-0 translate-y-1/2 -translate-x-1/2 w-96 h-96 bg-white/20 rounded-full blur-3xl" />
 
             <div className="container relative z-10 mx-auto px-4">
-                <div className="mx-auto max-w-4xl overflow-hidden rounded-3xl border border-white/20 bg-white/10 p-8 shadow-2xl backdrop-blur-md sm:p-12 lg:p-16">
+                <div className="mx-auto max-w-4xl overflow-hidden rounded-3xl border border-white/20 bg-white/10 p-8 shadow-2xl backdrop-blur-md sm:p-10 lg:p-12">
                     <div className="text-center">
                         <h2 className="mb-6 text-3xl font-bold tracking-tight text-white sm:text-4xl md:text-5xl drop-shadow-sm">
                             ¿Listo para iniciar tu proyecto?
@@ -28,7 +30,7 @@ export function CtaSection() {
                         </p>
 
                         <div className="flex flex-col items-center justify-center gap-4 sm:flex-row sm:gap-6">
-                            <Link
+                            <LeadCaptureLink
                                 href="/cotizar"
                                 className="group relative inline-flex h-14 items-center justify-center overflow-hidden rounded-full bg-white px-8 text-base font-bold text-brand-blue shadow-lg transition-all hover:bg-zinc-50 hover:scale-105 hover:shadow-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50"
                             >
@@ -36,14 +38,14 @@ export function CtaSection() {
                                     Solicitar Cotización
                                     <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
                                 </span>
-                            </Link>
+                            </LeadCaptureLink>
 
                             <Link
                                 href={CONTACT_INFO.whatsapp.url}
                                 className="group inline-flex h-14 items-center justify-center rounded-full bg-[#25D366] px-8 text-base font-bold text-white shadow-lg transition-all hover:bg-[#20bd5a] hover:scale-105 hover:shadow-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50"
                             >
                                 <span className="flex items-center gap-2">
-                                    <MessageCircle className="h-5 w-5" />
+                                    <WhatsAppIcon className="h-5 w-5" />
                                     Hablemos por WhatsApp
                                 </span>
                             </Link>

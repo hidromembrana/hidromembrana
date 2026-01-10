@@ -16,6 +16,7 @@ export function Footer() {
                                     src="/logo.png"
                                     alt="Hidromembrana Logo"
                                     fill
+                                    sizes="64px"
                                     className="object-contain"
                                 />
                             </div>

@@ -61,6 +61,7 @@ export const PRODUCTS: Product[] = [
         category: "servicios",
         href: "/servicios",
         imagePlaceholder: "IR",
+        images: ["/trabajadores.webp"],
         features: ["Soldadura por termofusión", "Detección y reparación de fugas", "Personal certificado", "Pruebas de calidad en terreno"]
     }
 ];

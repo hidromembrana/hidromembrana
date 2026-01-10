@@ -26,7 +26,7 @@ const faqs = [
 
 export function FaqSection() {
     return (
-        <section className="bg-background py-20">
+        <section className="bg-background py-12 md:py-16">
             <div className="container mx-auto px-4 md:px-6">
                 <div className="mx-auto max-w-3xl space-y-6">
                     <div className="space-y-2 text-center">

@@ -1,4 +1,4 @@
-export const IS_UNDER_CONSTRUCTION = true;
+export const IS_UNDER_CONSTRUCTION = process.env.IS_UNDER_CONSTRUCTION || false;
 
 export const CONTACT_INFO = {
     whatsapp: {
@@ -10,5 +10,5 @@ export const CONTACT_INFO = {
         }
     },
     email: "contacto@hidromembrana.cl",
-    address: "Región Metropolitana, Chile" // Generic for now
+    address: "Ovalle, Chile"
 };

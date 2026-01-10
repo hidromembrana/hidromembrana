@@ -1,10 +1,10 @@
 "use client"
 
-import { useState } from "react"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import * as z from "zod"
-import { CONTACT_INFO } from "@/lib/config"
+import { useSendEmail } from "@/hooks/use-send-email"
+import { ContactFormValues, contactFormSchema } from "@/lib/schemas/contact-schema"
 import { Button } from "@/components/ui/button"
 import {
     Form,
@@ -18,19 +18,17 @@ import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Loader2, CheckCircle2 } from "lucide-react"
 
-const formSchema = z.object({
-    name: z.string().min(2, "El nombre debe tener al menos 2 caracteres"),
-    email: z.string().email("Email inválido"),
-    phone: z.string().min(8, "Teléfono inválido").optional().or(z.literal("")),
-    message: z.string().min(10, "El mensaje debe tener al menos 10 caracteres"),
-})
+
+
+import { useState } from "react"
+import { Turnstile } from "@marsidev/react-turnstile"
 
 export function ContactForm() {
-    const [isSubmitting, setIsSubmitting] = useState(false)
-    const [isSuccess, setIsSuccess] = useState(false)
+    const { sendEmail, isSubmitting, isSuccess, reset } = useSendEmail()
+    const [token, setToken] = useState<string | null>(null)
 
-    const form = useForm<z.infer<typeof formSchema>>({
-        resolver: zodResolver(formSchema),
+    const form = useForm<ContactFormValues>({
+        resolver: zodResolver(contactFormSchema),
         defaultValues: {
             name: "",
             email: "",
@@ -39,14 +37,16 @@ export function ContactForm() {
         },
     })
 
-    async function onSubmit(values: z.infer<typeof formSchema>) {
-        setIsSubmitting(true)
-        // Simulate API call
-        await new Promise((resolve) => setTimeout(resolve, 1500))
-        console.log(values)
-        setIsSubmitting(false)
-        setIsSuccess(true)
-        form.reset()
+    async function onSubmit(values: ContactFormValues) {
+        if (!token) {
+            form.setError("root", { message: "Por favor completa el captcha." })
+            return
+        }
+        const success = await sendEmail('contact', values, token)
+        if (success) {
+            form.reset()
+            setToken(null) // Reset token on success
+        }
     }
 
     if (isSuccess) {
@@ -57,7 +57,7 @@ export function ContactForm() {
                 <p className="text-muted-foreground mb-6">
                     Gracias por contactarnos. Te responderemos a la brevedad posible.
                 </p>
-                <Button onClick={() => setIsSuccess(false)} variant="outline">
+                <Button onClick={reset} variant="outline">
                     Enviar otro mensaje
                 </Button>
             </div>
@@ -128,7 +128,20 @@ export function ContactForm() {
                     )}
                 />
 
-                <Button type="submit" className="w-full" disabled={isSubmitting}>
+                <div className="flex justify-center">
+                    <Turnstile
+                        siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || ""}
+                        onSuccess={(token) => setToken(token)}
+                        onError={() => setToken(null)}
+                        onExpire={() => setToken(null)}
+                    />
+                </div>
+
+                {form.formState.errors.root && (
+                    <p className="text-destructive text-sm text-center">{form.formState.errors.root.message}</p>
+                )}
+
+                <Button type="submit" className="w-full" disabled={isSubmitting || !token}>
                     {isSubmitting ? (
                         <>
                             <Loader2 className="mr-2 h-4 w-4 animate-spin" />

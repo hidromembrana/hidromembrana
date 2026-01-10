@@ -1,4 +1,4 @@
-import { ContactForm } from "@/components/contact-form"
+import { ContactForm } from "@/components/forms/contact-form"
 import { Mail, MapPin, Phone, Clock } from "lucide-react"
 import { CONTACT_INFO } from "@/lib/config"
 
