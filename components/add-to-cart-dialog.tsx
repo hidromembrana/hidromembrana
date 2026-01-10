@@ -158,7 +158,7 @@ export function AddToCartDialog({ product, children, variant = "default" }: AddT
                         </Button>
                     )}
                 </DialogTrigger>
-                <DialogContent className="sm:max-w-md">
+                <DialogContent className="sm:max-w-lg">
                     <DialogHeader>
                         <DialogTitle>Agregar a Cotización</DialogTitle>
                         <DialogDescription>
@@ -191,7 +191,7 @@ export function AddToCartDialog({ product, children, variant = "default" }: AddT
                                 <div className="space-y-4">
                                     <DimensionFields form={form} showHeight showAnchorage />
 
-                                    <div className="bg-muted/50 rounded-xl p-4 border flex flex-col items-center justify-center">
+                                    <div className="bg-muted/50 rounded-xl p-3 border flex flex-col items-center justify-center">
                                         <p className="text-sm font-medium mb-3 text-muted-foreground w-full text-left">
                                             Guía de Referencia
                                         </p>
@@ -200,7 +200,7 @@ export function AddToCartDialog({ product, children, variant = "default" }: AddT
                                             <img
                                                 src="/images/medidas-referencia.webp"
                                                 alt="Esquema de medidas"
-                                                className="object-contain w-full h-full p-2"
+                                                className="object-contain w-full h-full p-1"
                                             />
                                         </div>
                                     </div>
