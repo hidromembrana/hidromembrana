@@ -27,7 +27,7 @@ export const PRODUCTS: Product[] = [
             "/geomembrana-hdpe.webp"
         ],
         features: [
-            "Norma GRI-GM13 (Opción Certificada)",
+            "Norma GM13 (Opción Certificada)",
             "Calidad Nominal (Opción Económica)",
             "Espesores: 0.5mm - 2.5mm",
             "Alta resistencia UV y química",

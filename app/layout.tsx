@@ -48,6 +48,14 @@ export const metadata: Metadata = {
     description: "Venta e instalación profesional. Cotiza tu proyecto con nosotros.",
     url: 'https://www.hidromembrana.cl',
     siteName: 'Hidromembrana',
+    images: [
+      {
+        url: "/logo.png",
+        width: 1200,
+        height: 630,
+        alt: "Hidromembrana - Soluciones en Geosintéticos",
+      },
+    ],
     locale: 'es_CL',
     type: 'website',
   },

@@ -38,7 +38,7 @@ export function Hero() {
                                 </span>
                             </h1>
                             <p className="mx-auto max-w-[800px] text-lg text-zinc-200 md:text-xl leading-relaxed text-shadow-sm font-medium">
-                                Evita retrasos. Instalación certificada GRI-GM13. <br className="hidden sm:block" />
+                                Evita retrasos. Instalación certificada GM13. <br className="hidden sm:block" />
                                 Recibe tu presupuesto técnico en minutos.
                             </p>
                         </div>

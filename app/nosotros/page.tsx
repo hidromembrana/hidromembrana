@@ -89,7 +89,7 @@ export default function NosotrosPage() {
                         {[
                             {
                                 title: "Calidad Certificada",
-                                description: "No transamos con la calidad. Trabajamos solo con materiales que cumplen normas internacionales (GRI-GM13).",
+                                description: "No transamos con la calidad. Trabajamos solo con materiales que cumplen normas internacionales (GM13).",
                                 icon: ShieldCheck,
                                 color: "text-blue-500"
                             },

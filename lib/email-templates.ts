@@ -54,7 +54,11 @@ export const generateQuotationEmail = (data: any) => {
     '15kg': 'Rollo 15 Kg',
     '4mm': '4 mm',
     '5mm': '5 mm',
-    '6mm': '6 mm'
+    '6mm': '6 mm',
+    'calculationMode': 'Cálculo',
+    'dimensions': 'Dimensiones',
+    'total': 'M² Totales',
+    'thickness': 'Espesor'
   };
 
   const itemsHtml = items.map((item: any) => {

@@ -39,6 +39,12 @@ interface AddToCartDialogProps {
     variant?: "default" | "icon"
 }
 
+const THICKNESS_OPTIONS = [
+    { value: "1mm", label: "1.0 mm" },
+    { value: "1.5mm", label: "1.5 mm" },
+    { value: "2mm", label: "2.0 mm" },
+]
+
 export function AddToCartDialog({ product, children, variant = "default" }: AddToCartDialogProps) {
     const [open, setOpen] = useState(false)
     const [showLeadModal, setShowLeadModal] = useState(false)
@@ -80,6 +86,8 @@ export function AddToCartDialog({ product, children, variant = "default" }: AddT
         defaultValues: {
             quantity: 1,
             // Geo defaults
+            calculationMode: "dimensions",
+            thickness: "1mm",
             length: "",
             width: "",
             height: "",
@@ -102,11 +110,18 @@ export function AddToCartDialog({ product, children, variant = "default" }: AddT
         const config: any = {}
 
         if (isGeosynthetic) {
-            config.length = values.length
-            config.width = values.width
-            config.height = values.height
-            config.anchorage = values.anchorage
-            config.slope = values.slope
+            config.calculationMode = values.calculationMode
+            if (productId === "geomembrana-hdpe") {
+                config.thickness = values.thickness
+            }
+            if (values.calculationMode === "dimensions") {
+                config.length = values.length
+                config.width = values.width
+                // height removed from config if not needed, or kept optional
+                // config.height = values.height 
+                config.anchorage = values.anchorage
+                config.slope = values.slope
+            }
             config.squareMeters = values.squareMeters
         } else if (isWelding) {
             config.diameter = values.diameter
@@ -167,7 +182,7 @@ export function AddToCartDialog({ product, children, variant = "default" }: AddT
                     </DialogHeader>
 
                     <Form {...form}>
-                        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 py-4">
+                        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
 
                             {/* Common: Quantity (Hidden for Services & Geosynthetics) */}
                             {!isService && !isGeosynthetic && (
@@ -189,21 +204,106 @@ export function AddToCartDialog({ product, children, variant = "default" }: AddT
                             {/* Specifics: Geosynthetics */}
                             {isGeosynthetic && (
                                 <div className="space-y-4">
-                                    <DimensionFields form={form} showHeight showAnchorage />
+                                    {productId === "geomembrana-hdpe" && (
+                                        <FormField
+                                            control={form.control}
+                                            name="thickness"
+                                            render={({ field }) => (
+                                                <FormItem>
+                                                    <FormLabel>Espesor (mm)</FormLabel>
+                                                    <Select onValueChange={field.onChange} defaultValue={field.value}>
+                                                        <FormControl>
+                                                            <SelectTrigger>
+                                                                <SelectValue placeholder="Selecciona espesor" />
+                                                            </SelectTrigger>
+                                                        </FormControl>
+                                                        <SelectContent>
+                                                            {THICKNESS_OPTIONS.map((option) => (
+                                                                <SelectItem key={option.value} value={option.value}>
+                                                                    {option.label}
+                                                                </SelectItem>
+                                                            ))}
+                                                        </SelectContent>
+                                                    </Select>
+                                                    <FormMessage />
+                                                </FormItem>
+                                            )}
+                                        />
+                                    )}
 
-                                    <div className="bg-muted/50 rounded-xl p-3 border flex flex-col items-center justify-center">
-                                        <p className="text-sm font-medium mb-3 text-muted-foreground w-full text-left">
-                                            Guía de Referencia
-                                        </p>
-                                        <div className="relative w-full aspect-[4/3] bg-white rounded-lg overflow-hidden border shadow-sm">
-                                            {/* Using generic img tag as per user request to use the specific image */}
-                                            <img
-                                                src="/images/medidas-referencia.webp"
-                                                alt="Esquema de medidas"
-                                                className="object-contain w-full h-full p-1"
+                                    <FormField
+                                        control={form.control}
+                                        name="calculationMode"
+                                        render={({ field }) => (
+                                            <FormItem className="space-y-3">
+                                                <FormLabel>¿Cómo deseas ingresar las medidas?</FormLabel>
+                                                <FormControl>
+                                                    <RadioGroup
+                                                        onValueChange={field.onChange}
+                                                        defaultValue={field.value}
+                                                        className="flex flex-col space-y-1"
+                                                    >
+                                                        <FormItem className="flex items-center space-x-3 space-y-0">
+                                                            <FormControl>
+                                                                <RadioGroupItem value="dimensions" />
+                                                            </FormControl>
+                                                            <FormLabel className="font-normal">
+                                                                Calcular medidas (Largo, Ancho, etc.)
+                                                            </FormLabel>
+                                                        </FormItem>
+                                                        <FormItem className="flex items-center space-x-3 space-y-0">
+                                                            <FormControl>
+                                                                <RadioGroupItem value="total" />
+                                                            </FormControl>
+                                                            <FormLabel className="font-normal">
+                                                                Ya tengo los m² totales
+                                                            </FormLabel>
+                                                        </FormItem>
+                                                    </RadioGroup>
+                                                </FormControl>
+                                                <FormMessage />
+                                            </FormItem>
+                                        )}
+                                    />
+
+                                    {/* Show DimensionFields if mode is 'dimensions' (default) OR if not HDPE (others might default to dimensions) */}
+                                    {form.watch("calculationMode") === "dimensions" ? (
+                                        <>
+                                            <DimensionFields
+                                                form={form}
+                                                showHeight={false}
+                                                showAnchorage
+                                                showSquareMeters={false}
                                             />
-                                        </div>
-                                    </div>
+                                            <div className="bg-muted/50 rounded-xl p-3 border flex flex-col items-center justify-center">
+                                                <p className="text-sm font-medium mb-3 text-muted-foreground w-full text-left">
+                                                    Guía de Referencia
+                                                </p>
+                                                <div className="relative w-full aspect-[4/3] bg-white rounded-lg overflow-hidden border shadow-sm">
+                                                    <img
+                                                        src="/images/medidas-referencia.webp"
+                                                        alt="Esquema de medidas"
+                                                        className="object-contain w-full h-full p-1"
+                                                    />
+                                                </div>
+                                            </div>
+                                        </>
+                                    ) : (
+                                        // Mode is 'total'
+                                        <FormField
+                                            control={form.control}
+                                            name="squareMeters"
+                                            render={({ field }) => (
+                                                <FormItem>
+                                                    <FormLabel>Total m²</FormLabel>
+                                                    <FormControl>
+                                                        <Input type="number" step="0.01" placeholder="Ej: 500" {...field} />
+                                                    </FormControl>
+                                                    <FormMessage />
+                                                </FormItem>
+                                            )}
+                                        />
+                                    )}
                                 </div>
                             )}
 

@@ -6,13 +6,26 @@ export const quantitySchema = z.object({
 })
 
 // Extended schemas based on product type
+// Extended schemas based on product type
 export const geoSchema = quantitySchema.extend({
-    length: z.coerce.number().min(1, "Requerido"),
-    width: z.coerce.number().min(1, "Requerido"),
-    height: z.coerce.number().min(0, "Requerido"),
-    anchorage: z.coerce.number().min(0, "Requerido"),
-    slope: z.coerce.number().min(0, "Requerido"),
-    squareMeters: z.coerce.number().min(1, "Requerido"),
+    calculationMode: z.enum(["dimensions", "total"]).default("dimensions"),
+    thickness: z.string().optional(),
+    length: z.coerce.number().optional(),
+    width: z.coerce.number().optional(),
+    height: z.coerce.number().optional(),
+    anchorage: z.coerce.number().optional(),
+    slope: z.coerce.number().optional(),
+    squareMeters: z.coerce.number().optional(),
+}).superRefine((data, ctx) => {
+    if (data.calculationMode === "dimensions") {
+        if (!data.length) ctx.addIssue({ code: z.ZodIssueCode.custom, message: "Requerido", path: ["length"] })
+        if (!data.width) ctx.addIssue({ code: z.ZodIssueCode.custom, message: "Requerido", path: ["width"] })
+        // Height check removed as per user request to remove depth field
+        if (data.anchorage === undefined) ctx.addIssue({ code: z.ZodIssueCode.custom, message: "Requerido", path: ["anchorage"] })
+        if (data.slope === undefined) ctx.addIssue({ code: z.ZodIssueCode.custom, message: "Requerido", path: ["slope"] })
+    } else if (data.calculationMode === "total") {
+        if (!data.squareMeters) ctx.addIssue({ code: z.ZodIssueCode.custom, message: "Requerido", path: ["squareMeters"] })
+    }
 })
 
 export const weldingSchema = quantitySchema.extend({
