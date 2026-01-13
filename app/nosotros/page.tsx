@@ -1,4 +1,3 @@
-import { PageHeader } from "@/components/page-header"
 import { CtaSection } from "@/components/cta-section"
 import { Target, Eye, ShieldCheck, Zap, Users, Leaf } from "lucide-react"
 import Image from "next/image"
@@ -11,13 +10,15 @@ export const metadata = {
 export default function NosotrosPage() {
     return (
         <div className="bg-background min-h-screen">
-            <PageHeader
-                title="Sobre Nosotros"
-                description="Líderes en soluciones de impermeabilización con más de 10 años de experiencia en el mercado nacional."
-            />
+            <div className="container mx-auto px-4 md:px-6 py-4 md:py-8">
+                <h1 className="text-4xl font-bold tracking-tight mb-6">Sobre Nosotros</h1>
+                <p className="text-xl text-muted-foreground max-w-3xl">
+                    Líderes en soluciones de impermeabilización con más de 10 años de experiencia en el mercado nacional.
+                </p>
+            </div>
 
             {/* Mission & Vision Section */}
-            <section className="py-12 md:py-16 container mx-auto px-4 md:px-6">
+            <section className="py-8 md:pb-16 container mx-auto px-4 md:px-6">
                 <div className="grid md:grid-cols-2 gap-12 items-center">
                     <div className="space-y-6">
                         <div className="inline-flex items-center rounded-lg bg-brand-blue/10 px-3 py-1 text-sm font-medium text-brand-blue">
@@ -76,7 +77,7 @@ export default function NosotrosPage() {
             </section>
 
             {/* Core Values Section */}
-            <section className="py-20 bg-muted/30 border-y border-border">
+            <section className="py-14 bg-muted/30 border-y border-border">
                 <div className="container mx-auto px-4 md:px-6">
                     <div className="text-center max-w-3xl mx-auto mb-16">
                         <h2 className="text-3xl font-bold tracking-tight mb-4">Nuestros Valores</h2>
@@ -126,7 +127,7 @@ export default function NosotrosPage() {
 
             {/* Why Choose Us / Stats (Optional placeholder for now could be stats) */}
             {/* Why Choose Us */}
-            <section className="py-20 container mx-auto px-4 md:px-6">
+            <section className="py-14 container mx-auto px-4 md:px-6">
                 <div className="max-w-4xl mx-auto">
                     <div className="text-center mb-12">
                         <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-4">
