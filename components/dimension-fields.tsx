@@ -14,9 +14,10 @@ interface DimensionFieldsProps {
     form: UseFormReturn<any>
     showHeight?: boolean
     showAnchorage?: boolean
+    showSquareMeters?: boolean
 }
 
-export function DimensionFields({ form, showHeight = false, showAnchorage = false }: DimensionFieldsProps) {
+export function DimensionFields({ form, showHeight = false, showAnchorage = false, showSquareMeters = true }: DimensionFieldsProps) {
     return (
         <div className="grid grid-cols-2 gap-4">
             <FormField
@@ -92,20 +93,22 @@ export function DimensionFields({ form, showHeight = false, showAnchorage = fals
                 )}
             />
 
-            <FormField
-                control={form.control}
-                name="squareMeters"
-                render={({ field }) => (
-                    <FormItem className={showHeight || showAnchorage ? "col-span-1" : "col-span-2"}>
-                        <FormLabel>Total m²</FormLabel>
-                        <FormControl>
-                            {/* Allow manual input but could be calculated */}
-                            <Input type="number" step="0.01" placeholder="Ej: 500" {...field} />
-                        </FormControl>
-                        <FormMessage />
-                    </FormItem>
-                )}
-            />
+            {showSquareMeters && (
+                <FormField
+                    control={form.control}
+                    name="squareMeters"
+                    render={({ field }) => (
+                        <FormItem className={showHeight || showAnchorage ? "col-span-1" : "col-span-2"}>
+                            <FormLabel>Total m²</FormLabel>
+                            <FormControl>
+                                {/* Allow manual input but could be calculated */}
+                                <Input type="number" step="0.01" placeholder="Ej: 500" {...field} />
+                            </FormControl>
+                            <FormMessage />
+                        </FormItem>
+                    )}
+                />
+            )}
         </div>
     )
 }

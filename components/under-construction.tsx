@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { CONTACT_INFO } from "@/lib/config";
+import { WhatsAppIcon } from "@/components/icons/whatsapp-icon";
 
 export function UnderConstruction() {
     return (
@@ -35,6 +36,7 @@ export function UnderConstruction() {
                     className="group inline-flex h-12 items-center justify-center rounded-full bg-[#25D366] px-8 text-base font-bold text-white shadow-lg transition-all hover:bg-[#20bd5a] hover:scale-105 hover:shadow-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-green-500/50"
                 >
                     <span className="flex items-center gap-2">
+                        <WhatsAppIcon className="h-5 w-5" />
                         Conversemos por WhatsApp
                     </span>
                 </a>

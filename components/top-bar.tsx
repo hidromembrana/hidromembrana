@@ -9,12 +9,12 @@ export function TopBar() {
             <div className="container mx-auto flex flex-col items-center justify-between gap-2 px-4 md:flex-row">
                 <div className="flex flex-wrap items-center justify-center gap-4 text-center md:justify-start">
                     <div className="flex items-center gap-1.5">
-                        <Truck className="h-3.5 w-3.5 text-brand-cyan" />
+                        <Truck className="h-3.5 w-3.5" />
                         <span>Despacho a todo Chile</span>
                     </div>
                     <div className="hidden h-3 w-px bg-white/30 sm:block" />
                     <div className="flex items-center gap-1.5">
-                        <Clock className="h-3.5 w-3.5 text-brand-cyan" />
+                        <Clock className="h-3.5 w-3.5" />
                         <span>Lunes a Viernes: 09:00 - 18:00 hrs</span>
                     </div>
                 </div>
