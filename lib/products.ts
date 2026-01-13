@@ -45,16 +45,6 @@ export const PRODUCTS: Product[] = [
         features: ["Disponible en No Tejido", "Costo-eficiente", "Separación y filtración", "Protección de geomembranas"]
     },
     {
-        id: "soldadura-hdpe",
-        title: "Soldadura de Aporte HDPE",
-        description: "Cordones de soldadura y material de aporte para termofusión de geomembranas HDPE.",
-        category: "insumos",
-        href: "/productos/soldadura-hdpe",
-        imagePlaceholder: "S",
-        images: ["/soldadura-de-aporte-hdpe.webp"],
-        features: ["Compatibilidad 100% HDPE", "Para extrusoras y cuñas", "Alta pureza", "Diferentes diámetros"]
-    },
-    {
         id: "servicio-instalacion-reparacion",
         title: "Instalación o Reparación",
         description: "Servicio completo de instalación certificada y reparación de sistemas de impermeabilización.",
@@ -63,5 +53,15 @@ export const PRODUCTS: Product[] = [
         imagePlaceholder: "IR",
         images: ["/trabajadores.webp"],
         features: ["Soldadura por termofusión", "Detección y reparación de fugas", "Personal certificado", "Pruebas de calidad en terreno"]
+    },
+    {
+        id: "soldadura-hdpe",
+        title: "Soldadura de Aporte HDPE",
+        description: "Cordones de soldadura y material de aporte para termofusión de geomembranas HDPE.",
+        category: "insumos",
+        href: "/productos/soldadura-hdpe",
+        imagePlaceholder: "S",
+        images: ["/soldadura-de-aporte-hdpe.webp"],
+        features: ["Compatibilidad 100% HDPE", "Para extrusoras y cuñas", "Alta pureza", "Diferentes diámetros"]
     }
 ];
