@@ -55,7 +55,7 @@ const SERVICES: ServiceItem[] = [
         icon: Layers,
         color: "from-blue-500 to-cyan-400",
         colSpan: "md:col-span-1",
-        hrefId: "servicio-instalacion-reparacion"
+        hrefId: "geomembrana-hdpe"
     },
     {
         id: "instalacion-geotextiles",
@@ -64,7 +64,7 @@ const SERVICES: ServiceItem[] = [
         icon: ShieldCheck,
         color: "from-emerald-500 to-green-400",
         colSpan: "md:col-span-1",
-        hrefId: "servicio-instalacion-reparacion"
+        hrefId: "geotextil"
     },
     {
         id: "mantencion-instalaciones",

@@ -58,22 +58,28 @@ export const generateQuotationEmail = (data: any) => {
     'calculationMode': 'Cálculo',
     'dimensions': 'Dimensiones',
     'total': 'M² Totales',
-    'thickness': 'Espesor'
+    'thickness': 'Espesor',
+    'details': 'Detalles'
   };
 
   const itemsHtml = items.map((item: any) => {
-    const configEntries = Object.entries(item.config || {}).map(([k, v]) => {
-      const key = translations[k] || k;
-      const value = translations[v as string] || v;
-      return `${key}: ${value}`;
-    });
+    const configEntries = Object.entries(item.config || {})
+      .filter(([k, v]) => {
+        if (k === 'squareMeters' && (v === 0 || v === '0')) return false;
+        return true;
+      })
+      .map(([k, v]) => {
+        const key = translations[k] || k;
+        const value = translations[v as string] || v;
+        return `<strong>${key}:</strong> ${value}`;
+      });
 
     return `
     <tr style="border-bottom: 1px solid #eee;">
-      <td style="padding: 10px;">${item.productName}</td>
-      <td style="padding: 10px;">${item.quantity}</td>
-      <td style="padding: 10px; font-size: 0.9em; color: #666;">
-        ${configEntries.join(', ')}
+      <td style="padding: 10px; vertical-align: top;">${item.productName}</td>
+      <td style="padding: 10px; vertical-align: top;">${item.quantity}</td>
+      <td style="padding: 10px; color: #222; vertical-align: top;">
+        ${configEntries.join('<br>')}
       </td>
     </tr>
   `}).join('');

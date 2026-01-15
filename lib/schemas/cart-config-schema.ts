@@ -50,7 +50,12 @@ export const serviceSchema = quantitySchema.extend({
     path: ["materialType"]
 })
 
+export const maintenanceSchema = quantitySchema.extend({
+    details: z.string().min(10, "Por favor describe tu problema con más detalle (mínimo 10 caracteres)"),
+})
+
 export type QuantityFormValues = z.infer<typeof quantitySchema>
 export type GeoFormValues = z.infer<typeof geoSchema>
 export type WeldingFormValues = z.infer<typeof weldingSchema>
 export type ServiceFormValues = z.infer<typeof serviceSchema>
+export type MaintenanceFormValues = z.infer<typeof maintenanceSchema>
