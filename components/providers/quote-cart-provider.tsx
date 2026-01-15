@@ -20,6 +20,9 @@ export interface QuoteItemConfig {
     // Welding
     diameter?: string
     format?: string
+
+    // Maintenance
+    details?: string
 }
 
 export interface ContactInfo {

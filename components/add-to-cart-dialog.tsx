@@ -8,7 +8,7 @@ import { useRouter } from "next/navigation"
 import { Product } from "@/lib/products"
 import { useQuoteCart } from "@/components/providers/quote-cart-provider"
 import { LeadCaptureDialog } from "@/components/forms/lead-capture-dialog"
-import { quantitySchema, geoSchema, weldingSchema, serviceSchema } from "@/lib/schemas/cart-config-schema"
+import { quantitySchema, geoSchema, weldingSchema, serviceSchema, maintenanceSchema } from "@/lib/schemas/cart-config-schema"
 import { Button } from "@/components/ui/button"
 import {
     Dialog,
@@ -30,6 +30,7 @@ import {
 import { Input } from "@/components/ui/input"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { Textarea } from "@/components/ui/textarea"
 import { Info, Plus, ShoppingCart } from "lucide-react"
 import { DimensionFields } from "./dimension-fields"
 
@@ -80,7 +81,7 @@ export function AddToCartDialog({ product, children, variant = "default" }: AddT
         resolver: zodResolver(
             isGeosynthetic ? geoSchema :
                 isWelding ? weldingSchema :
-                    isService ? serviceSchema :
+                    isService ? maintenanceSchema :
                         quantitySchema
         ),
         defaultValues: {
@@ -98,8 +99,7 @@ export function AddToCartDialog({ product, children, variant = "default" }: AddT
             diameter: "",
             format: "",
             // Service defaults
-            hasMaterial: undefined,
-            materialType: "",
+            details: "",
         },
         mode: "onSubmit", // Only validate on submit, not on mount or change
         reValidateMode: "onSubmit", // Only revalidate on submit
@@ -127,14 +127,7 @@ export function AddToCartDialog({ product, children, variant = "default" }: AddT
             config.diameter = values.diameter
             config.format = values.format
         } else if (isService) {
-            config.hasMaterial = values.hasMaterial
-            config.materialType = values.materialType
-            config.length = values.length
-            config.width = values.width
-            config.height = values.height
-            config.anchorage = values.anchorage
-            config.slope = values.slope
-            config.squareMeters = values.squareMeters
+            config.details = values.details
         }
 
         addItem(product, config, values.quantity)
@@ -356,67 +349,26 @@ export function AddToCartDialog({ product, children, variant = "default" }: AddT
                                 </div>
                             )}
 
-                            {/* Specifics: Services */}
+                            {/* Specifics: Services (Maintenance) */}
                             {isService && (
                                 <div className="space-y-4">
-                                    <DimensionFields form={form} showHeight showAnchorage />
                                     <FormField
                                         control={form.control}
-                                        name="hasMaterial"
+                                        name="details"
                                         render={({ field }) => (
-                                            <FormItem className="space-y-3">
-                                                <FormLabel>¿Ya cuentas con el material?</FormLabel>
+                                            <FormItem>
+                                                <FormLabel>Detalles del Servicio</FormLabel>
                                                 <FormControl>
-                                                    <RadioGroup
-                                                        onValueChange={field.onChange}
-                                                        defaultValue={field.value}
-                                                        className="flex flex-col space-y-1"
-                                                    >
-                                                        <FormItem className="flex items-center space-x-3 space-y-0">
-                                                            <FormControl>
-                                                                <RadioGroupItem value="yes" />
-                                                            </FormControl>
-                                                            <FormLabel className="font-normal">
-                                                                Sí, solo instalación
-                                                            </FormLabel>
-                                                        </FormItem>
-                                                        <FormItem className="flex items-center space-x-3 space-y-0">
-                                                            <FormControl>
-                                                                <RadioGroupItem value="no" />
-                                                            </FormControl>
-                                                            <FormLabel className="font-normal">
-                                                                No, necesito materiales
-                                                            </FormLabel>
-                                                        </FormItem>
-                                                    </RadioGroup>
+                                                    <Textarea
+                                                        placeholder="Describe tu problema o necesidad (ej: filtración en tranque, rotura en geomembrana, etc.)"
+                                                        className="resize-none min-h-[100px]"
+                                                        {...field}
+                                                    />
                                                 </FormControl>
                                                 <FormMessage />
                                             </FormItem>
                                         )}
                                     />
-                                    {form.watch("hasMaterial") === "no" && (
-                                        <FormField
-                                            control={form.control}
-                                            name="materialType"
-                                            render={({ field }) => (
-                                                <FormItem>
-                                                    <FormLabel>Material Requerido</FormLabel>
-                                                    <Select onValueChange={field.onChange} defaultValue={field.value}>
-                                                        <FormControl>
-                                                            <SelectTrigger>
-                                                                <SelectValue placeholder="Selecciona material..." />
-                                                            </SelectTrigger>
-                                                        </FormControl>
-                                                        <SelectContent>
-                                                            <SelectItem value="geomembrana-hdpe">Geomembrana HDPE</SelectItem>
-                                                            <SelectItem value="geotextil">Geotextil</SelectItem>
-                                                        </SelectContent>
-                                                    </Select>
-                                                    <FormMessage />
-                                                </FormItem>
-                                            )}
-                                        />
-                                    )}
                                 </div>
                             )}
 
