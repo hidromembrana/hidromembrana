@@ -204,7 +204,7 @@ export function AddToCartDialog({ product, children, variant = "default" }: AddT
                             {/* Specifics: Geosynthetics */}
                             {isGeosynthetic && (
                                 <div className="space-y-4">
-                                    {productId === "geomembrana-hdpe" && (
+                                    {(productId === "geomembrana-hdpe" || productId === "instalacion-geomembranas") && (
                                         <FormField
                                             control={form.control}
                                             name="thickness"
