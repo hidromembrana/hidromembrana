@@ -55,7 +55,7 @@ export function Navbar() {
                             className="object-contain"
                         />
                     </div>
-                    <span className="text-xl font-bold bg-[image:var(--image-brand-gradient)] bg-clip-text text-transparent">
+                    <span className="text-xl font-bold bg-[image:var(--image-brand-gradient)] bg-clip-text text-transparent md:hidden lg:block">
                         Hidromembrana
                     </span>
                 </Link>

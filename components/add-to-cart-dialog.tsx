@@ -157,7 +157,7 @@ export function AddToCartDialog({ product, children, variant = "default" }: AddT
                             size={variant === "icon" ? "icon" : "default"}
                             variant="default"
                             className={variant === "icon"
-                                ? "h-9 w-9 rounded-full bg-brand-blue text-white shadow-sm hover:bg-brand-blue/90 hover:scale-105 transition-all"
+                                ? "h-9 w-9 rounded-full bg-brand-blue text-white shadow-sm hover:bg-brand-blue/90 hover:scale-105 transition-all !cursor-pointer relative z-20"
                                 : "w-full sm:w-auto"}
                         >
                             {variant === "icon" ? (
