@@ -30,6 +30,11 @@ export const metadata: Metadata = {
     template: "%s | Hidromembrana",
   },
 
+  icons: {
+    icon: "/apple-touch-icon.png",
+    apple: "/apple-touch-icon.png",
+  },
+
   description: "Expertos en venta e instalación de geomembrana HDPE, geotextil y polylock. Servicios de termofusión, soldadura y reparaciones en todo Chile.",
 
   keywords: [
