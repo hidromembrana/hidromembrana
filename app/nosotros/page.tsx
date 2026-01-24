@@ -140,7 +140,7 @@ export default function NosotrosPage() {
 
                     <ul className="grid gap-6 sm:grid-cols-2">
                         {[
-                            "Stock permanente de bobinas",
+                            "Stock permanente de geosintéticos",
                             "Despacho a todo Chile",
                             "Asesoría técnica gratuita",
                             "Equipos de termofusión propios",
