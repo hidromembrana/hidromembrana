@@ -2,6 +2,7 @@ import Link from "next/link"
 import Image from "next/image"
 import { ArrowRight } from "lucide-react"
 import { Product } from "@/lib/products"
+import { AddToCartDialog } from "@/components/add-to-cart-dialog"
 
 interface ProductCardProps {
     product: Product
@@ -43,13 +44,16 @@ export function ProductCard({ product }: ProductCardProps) {
                     )}
                 </div>
             </div>
-            <div className="relative z-10 mt-6 pt-4 border-t border-border/50">
+            <div className="relative z-10 mt-6 pt-4 border-t border-border/50 flex items-center justify-between gap-4">
                 <Link
                     href={product.href}
                     className="inline-flex items-center text-sm font-medium text-brand-blue hover:text-brand-cyan"
                 >
                     Ver detalles <ArrowRight className="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1" />
                 </Link>
+                {product.id !== "servicio-instalacion-reparacion" && (
+                    <AddToCartDialog product={product} variant="icon" />
+                )}
             </div>
         </div>
     )

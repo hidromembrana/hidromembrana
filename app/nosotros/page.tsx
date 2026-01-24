@@ -96,13 +96,13 @@ export default function NosotrosPage() {
                             },
                             {
                                 title: "Rapidez de Respuesta",
-                                description: "Entendemos la urgencia de su obra. Nuestro stock permanente nos permite despachar en tiempo récord.",
+                                description: "Entendemos la urgencia de su obra. Nuestro stock permanente nos permite despachar en los plazos requeridos.",
                                 icon: Zap,
                                 color: "text-amber-500"
                             },
                             {
                                 title: "Equipo Experto",
-                                description: "Técnicos calificados y en constante capacitación para asegurar soldaduras perfectas.",
+                                description: "Técnicos calificados y en constante capacitación para asegurar soldaduras de alta resistencia.",
                                 icon: Users,
                                 color: "text-cyan-500"
                             },
