@@ -31,7 +31,7 @@ import { Input } from "@/components/ui/input"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Textarea } from "@/components/ui/textarea"
-import { Info, Plus, ShoppingCart } from "lucide-react"
+import { Info, Plus, ShoppingCart, Maximize2 } from "lucide-react"
 import { DimensionFields } from "./dimension-fields"
 
 interface AddToCartDialogProps {
@@ -48,6 +48,7 @@ const THICKNESS_OPTIONS = [
 
 export function AddToCartDialog({ product, children, variant = "default" }: AddToCartDialogProps) {
     const [open, setOpen] = useState(false)
+    const [showImageZoom, setShowImageZoom] = useState(false)
     const [showLeadModal, setShowLeadModal] = useState(false)
     const { addItem, contactInfo } = useQuoteCart()
     const router = useRouter()
@@ -154,13 +155,15 @@ export function AddToCartDialog({ product, children, variant = "default" }: AddT
                     {children ? children : (
                         <Button
                             size={variant === "icon" ? "icon" : "default"}
-                            variant={variant === "icon" ? "ghost" : "default"}
-                            className={variant === "icon" ? "h-8 w-8 rounded-full" : "w-full sm:w-auto"}
+                            variant="default"
+                            className={variant === "icon"
+                                ? "h-9 w-9 rounded-full bg-brand-blue text-white shadow-sm hover:bg-brand-blue/90 hover:scale-105 transition-all !cursor-pointer relative z-20"
+                                : "w-full sm:w-auto"}
                         >
                             {variant === "icon" ? (
-                                <Plus className="h-4 w-4" />
+                                <Plus className="h-5 w-5" />
                             ) : (
-                                <>Aggregar <ShoppingCart className="ml-2 h-4 w-4" /></>
+                                <>Agregar <ShoppingCart className="ml-2 h-4 w-4" /></>
                             )}
                             <span className="sr-only">Agregar a cotización</span>
                         </Button>
@@ -268,16 +271,23 @@ export function AddToCartDialog({ product, children, variant = "default" }: AddT
                                                 showAnchorage
                                                 showSquareMeters={false}
                                             />
-                                            <div className="bg-muted/50 rounded-xl p-3 border flex flex-col items-center justify-center">
-                                                <p className="text-sm font-medium mb-3 text-muted-foreground w-full text-left">
-                                                    Guía de Referencia
+                                            <div className="bg-muted/50 rounded-xl p-2 border flex flex-col items-center justify-center">
+                                                <p className="text-xs font-medium mb-2 text-muted-foreground w-full text-left">
+                                                    Guía de Referencia <span className="font-normal opacity-80">(Toca para ampliar)</span>
                                                 </p>
-                                                <div className="relative w-full aspect-[4/3] bg-white rounded-lg overflow-hidden border shadow-sm">
+                                                <div
+                                                    className="relative w-full h-32 bg-white rounded-lg overflow-hidden border shadow-sm group cursor-zoom-in transition-all hover:border-brand-blue/50"
+                                                    onClick={() => setShowImageZoom(true)}
+                                                >
                                                     <img
                                                         src="/images/medidas-referencia.webp"
                                                         alt="Esquema de medidas"
                                                         className="object-contain w-full h-full p-1"
                                                     />
+                                                    {/* Zoom icon - always visible, bottom right */}
+                                                    <div className="absolute bottom-2 right-2 bg-white/90 rounded-full p-1.5 shadow-sm backdrop-blur-sm border transition-transform group-hover:scale-110">
+                                                        <Maximize2 className="h-4 w-4 text-brand-blue" />
+                                                    </div>
                                                 </div>
                                             </div>
                                         </>
@@ -381,6 +391,26 @@ export function AddToCartDialog({ product, children, variant = "default" }: AddT
                     </Form>
                 </DialogContent>
             </Dialog>
+
+            {/* Reference Image Zoom Modal */}
+            <Dialog open={showImageZoom} onOpenChange={setShowImageZoom}>
+                <DialogContent className="max-w-4xl w-full p-0 overflow-hidden bg-transparent border-none shadow-none">
+                    <DialogTitle className="sr-only">Guía de Referencia Ampliada</DialogTitle>
+                    <div className="relative w-full h-auto bg-white rounded-lg overflow-hidden">
+                        <img
+                            src="/images/medidas-referencia.webp"
+                            alt="Esquema de medidas detallado"
+                            className="w-full h-auto object-contain"
+                        />
+                        <button
+                            onClick={() => setShowImageZoom(false)}
+                            className="absolute top-2 right-2 bg-black/50 hover:bg-black/70 text-white rounded-full p-1"
+                        >
+                            <Plus className="h-6 w-6 rotate-45" /> {/* Close icon using rotated Plus */}
+                        </button>
+                    </div>
+                </DialogContent>
+            </Dialog >
         </>
     )
 }

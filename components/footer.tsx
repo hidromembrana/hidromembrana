@@ -27,20 +27,6 @@ export function Footer() {
                         <p className="text-sm text-muted-foreground">
                             Expertos en soluciones de impermeabilización y geosintéticos. Calidad y confianza en cada proyecto.
                         </p>
-                        <div className="flex space-x-4">
-                            <Link href="#" className="text-muted-foreground hover:text-brand-blue">
-                                <Facebook className="h-5 w-5" />
-                                <span className="sr-only">Facebook</span>
-                            </Link>
-                            <Link href="#" className="text-muted-foreground hover:text-brand-blue">
-                                <Instagram className="h-5 w-5" />
-                                <span className="sr-only">Instagram</span>
-                            </Link>
-                            <Link href="#" className="text-muted-foreground hover:text-brand-blue">
-                                <Linkedin className="h-5 w-5" />
-                                <span className="sr-only">LinkedIn</span>
-                            </Link>
-                        </div>
                     </div>
 
                     {/* Quick Links */}

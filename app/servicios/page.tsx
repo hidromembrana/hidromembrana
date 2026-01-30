@@ -12,6 +12,7 @@ import { CtaSection } from "@/components/cta-section"
 import { AddToCartDialog } from "@/components/add-to-cart-dialog"
 import { PRODUCTS } from "@/lib/products"
 import { WhatsAppIcon } from "@/components/icons/whatsapp-icon"
+import Image from "next/image"
 import Link from "next/link"
 
 function ServiceAction({ service }: { service: ServiceItem }) {
@@ -91,26 +92,32 @@ export default function ServiciosPage() {
         <div className="min-h-screen bg-background">
             {/* Hero Section */}
             <section className="relative overflow-hidden py-20 pb-32 lg:py-32">
-                <div className="absolute inset-0 -z-10">
-                    <div className="absolute top-0 right-0 -translate-y-1/2 translate-x-1/2 w-[500px] h-[500px] bg-brand-blue/20 rounded-full blur-[100px]" />
-                    <div className="absolute bottom-0 left-0 translate-y-1/2 -translate-x-1/2 w-[500px] h-[500px] bg-brand-cyan/20 rounded-full blur-[100px]" />
+                <div className="absolute inset-0 w-full h-full">
+                    <Image
+                        src="/hero.webp"
+                        fill
+                        alt="Fondo de servicios"
+                        className="object-cover"
+                        priority
+                    />
+                    <div className="absolute inset-0 bg-black/60" />
                 </div>
 
-                <div className="container mx-auto px-4 text-center">
+                <div className="relative z-10 container mx-auto px-4 text-center">
                     <h1 className="mb-6 text-4xl font-extrabold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl">
-                        <span className="block text-foreground">Soluciones Integrales</span>
+                        <span className="block text-white">Soluciones Integrales</span>
                         <span className="block bg-[image:var(--image-brand-gradient)] bg-clip-text text-transparent">
                             en Geosintéticos
                         </span>
                     </h1>
-                    <p className="mx-auto max-w-2xl text-lg text-muted-foreground md:text-xl">
+                    <p className="mx-auto max-w-2xl text-lg text-gray-200 md:text-xl">
                         Ingeniería, instalación y mantenimiento con los más altos estándares de calidad y certificación.
                     </p>
                 </div>
             </section>
 
             {/* Bento Grid Services 2x2 */}
-            <section className="container mx-auto px-4 pb-24">
+            <section className="container mx-auto px-4 py-18">
                 <div className="grid grid-cols-1 gap-6 md:grid-cols-2 auto-rows-fr">
                     {SERVICES.map((service) => (
                         <div
